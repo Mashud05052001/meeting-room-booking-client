@@ -1,0 +1,56 @@
+/* .navbar-items .active {
+  color: #8f7d51;
+  position: relative;
+}
+
+.navbar-items .active::after {
+  position: absolute;
+  content: "";
+  height: 3px;
+  width: 100%;
+  background: #b39c65;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  transition: all 1s ease;
+}
+
+.navbar-items1 .active {
+  color: white;
+  background: #b39c65;
+  overflow: hidden;
+} */
+
+.navbar-items .active {
+  color: #8f7d51;
+  position: relative;
+}
+
+.navbar-items .active::after {
+  position: absolute;
+  content: "";
+  height: 3px;
+  width: 0;
+  background: #b39c65;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 100px;
+  transition: all 1s ease-in-out; /* Transition width for sliding effect */
+}
+
+.navbar-items .active::after {
+  width: 100%; /* Full width when active */
+}
+
+.navbar-items .group:hover::after {
+  width: 100%; /* Full width on hover */
+}
+
+.navbar-items1 .active {
+  color: white;
+  background: #b39c65;
+  overflow: hidden;
+  transition: all 1s ease-in-out; /* Smooth background transition */
+}
