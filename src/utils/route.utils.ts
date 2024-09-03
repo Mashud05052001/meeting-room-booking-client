@@ -1,3 +1,4 @@
+import { routerNavbarItemsInDashboardLayout } from "../constant/routes.constant";
 import { TNavbarItems, TNavbarRoutes, TRoutes } from "../types";
 
 export const generateNavbarItems = (navbarItems: TNavbarRoutes[]) => {
@@ -24,4 +25,13 @@ export const generateRoutes = (routeItems: TNavbarRoutes[]) => {
     return acc;
   }, []);
   return routes;
+};
+
+export const generateRouteItems = (itemNames: string[]) => {
+  const routeItems = routerNavbarItemsInDashboardLayout.filter((item) => {
+    for (const name of itemNames) {
+      if (item.name === name) return item;
+    }
+  });
+  return routeItems;
 };

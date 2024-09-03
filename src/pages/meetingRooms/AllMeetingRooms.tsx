@@ -1,4 +1,4 @@
-const MeetingRoom = () => {
+const AllMeetingRooms = () => {
   return (
     <div>
       <h1 className="text-2xl"> This is MeetingRoom </h1>
@@ -6,4 +6,4 @@ const MeetingRoom = () => {
   );
 };
 
-export default MeetingRoom;
+export default AllMeetingRooms;

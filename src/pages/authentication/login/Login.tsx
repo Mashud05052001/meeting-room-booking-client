@@ -12,15 +12,18 @@ import { useAppDispatch } from "../../../redux/hook";
 import { TError } from "../../../types/reduxResponse.type";
 import FormButton from "../../../components/button/FormButton";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import OpacityMotion from "../../../components/motionDiv/OpacityMotion";
 import { useState } from "react";
 import ForgetPassword from "../passwordRecovery/ForgetPassword";
 
 const Login = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [forgetPassModal, setForgetPassModal] = useState(false);
   const [loginUser, { isLoading: isLoginLoading, error }] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const from = location.state?.from?.pathname || "/";
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const loadingId = toast.loading("Logging in...");
     try {
@@ -31,8 +34,10 @@ const Login = () => {
         const authData: TAuthState = { token, user };
         dispatch(setUser(authData));
         toast.success("Logged in successfully", { id: loadingId });
+        navigate(from);
       }
     } catch (error) {
+      console.log(error);
       const errorMessage = (error as TError)?.data?.message;
       toast.error(`Failed. ${errorMessage}`, { id: loadingId });
     }

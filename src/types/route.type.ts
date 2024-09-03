@@ -6,6 +6,12 @@ export type TNavbarRoutes = {
   element?: ReactNode;
 };
 
+export type TNavbarRoutesAllItemsExist = {
+  name: string;
+  path: string;
+  element: ReactNode;
+};
+
 export type TNavbarItems = {
   to: string;
   name: string;

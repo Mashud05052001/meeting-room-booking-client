@@ -37,20 +37,24 @@
   left: 50%;
   transform: translateX(-50%);
   border-radius: 100px;
-  transition: all 1s ease-in-out; /* Transition width for sliding effect */
+  transition: all 1s ease-in-out;
 }
 
 .navbar-items .active::after {
-  width: 100%; /* Full width when active */
+  width: 100%;
 }
 
 .navbar-items .group:hover::after {
-  width: 100%; /* Full width on hover */
+  width: 100%;
 }
 
 .navbar-items1 .active {
   color: white;
   background: #b39c65;
   overflow: hidden;
-  transition: all 1s ease-in-out; /* Smooth background transition */
+  transition: all 1s ease-in-out;
+}
+
+.sm-navbar-items .active {
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }

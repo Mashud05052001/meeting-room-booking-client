@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import FormButton from "../../../components/button/FormButton";
 import CenterContainer from "../../../components/container/CenterContainer";
@@ -20,6 +20,9 @@ const Signup = () => {
   const [signupUser, { isLoading: isSignupLoading, error }] =
     useSignupMutation();
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...signupUserData } = data;
@@ -35,6 +38,7 @@ const Signup = () => {
         const authData: TAuthState = { token, user };
         dispatch(setUser(authData));
         toast.success("User registered successfull", { id: loadingId });
+        navigate(from);
       }
     } catch (error) {
       const errorMessage = (error as TError)?.data?.message;
