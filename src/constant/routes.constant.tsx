@@ -1,17 +1,23 @@
-import { TNavbarRoutes, TNavbarRoutesAllItemsExist } from "../types";
+import Dashboard from "@/pages/admin/dashboard/Dashboard";
+import AllRooms from "@/pages/admin/roomManagement/AllRooms";
+import CreateRoom from "@/pages/admin/roomManagement/CreateRoom";
+import AllSlots from "@/pages/admin/slotManagement/AllSlots";
+import CreateSlots from "@/pages/admin/slotManagement/CreateSlots";
 import About from "../pages/about/About";
+import BookingManagement from "../pages/admin/bookingManagement/BookingManagement";
 import Contact from "../pages/contact/Contact";
 import Home from "../pages/home/Home";
 import AllMeetingRooms from "../pages/meetingRooms/AllMeetingRooms";
+import Checkout from "../pages/payment/Checkout";
+import Profile from "../pages/profile/Profile";
+import BookingForm from "../pages/user/bookingForm/BookingForm";
 import MyBookings from "../pages/user/myBookings/MyBookings";
 import SingleMeetingRoom from "../pages/user/singleMeetingRoomDetails/SingleMeetingRoomDetails";
-import BookingForm from "../pages/user/bookingForm/BookingForm";
-import Checkout from "../pages/payment/Checkout";
-import ProtectedUserRoute from "../routes/ProtectedUserRoutes";
-import ProtectedRoute from "../routes/ProtectedRoute";
 import ProtectedAdminRoute from "../routes/ProtectedAdminRoute";
-import BookingManagement from "../pages/admin/bookingManagement/BookingManagement";
-import Profile from "../pages/profile/Profile";
+import ProtectedRoute from "../routes/ProtectedRoute";
+import ProtectedUserRoute from "../routes/ProtectedUserRoutes";
+import { TNavbarRoutes, TNavbarRoutesAllItemsExist } from "../types";
+
 export const commonRouterNavbarItemsInMainLayout: TNavbarRoutes[] = [
   { name: "Home", path: "", element: <Home /> },
   { name: "Home", path: "home", element: <Home /> },
@@ -33,17 +39,21 @@ export const routerNavbarItemsInDashboardLayout: TNavbarRoutesAllItemsExist[] =
     // prettier-ignore
     { name:"Profile", path: "profile", element: <ProtectedRoute><Profile /></ProtectedRoute> },
     // prettier-ignore
-    { name:"Dashboard", path: "", element: <ProtectedAdminRoute><BookingManagement /></ProtectedAdminRoute> },
+    { name:"Dashboard", path: "", element: <ProtectedAdminRoute><Dashboard /></ProtectedAdminRoute> },
     // prettier-ignore
-    { name:"Room Management", path: "room-management", element: <ProtectedAdminRoute><Checkout /></ProtectedAdminRoute> },
+    { name:"Create Room", path: "create-room", element: <ProtectedAdminRoute><CreateRoom /></ProtectedAdminRoute> },
     // prettier-ignore
-    { name:"Slot Management", path: "slots-management", element: <ProtectedAdminRoute><Checkout /></ProtectedAdminRoute> },
+    { name:"All Rooms", path: "all-rooms", element: <ProtectedAdminRoute><AllRooms /></ProtectedAdminRoute> },
     // prettier-ignore
-    { name:"Booking Management", path: "booking-management", element: <ProtectedAdminRoute><Checkout /></ProtectedAdminRoute> },
+    { name:"Create Slots", path: "create-slots", element: <ProtectedAdminRoute><CreateSlots /></ProtectedAdminRoute> },
+    // prettier-ignore
+    { name:"All Slots", path: "all-slots", element: <ProtectedAdminRoute><AllSlots /></ProtectedAdminRoute> },
+    // prettier-ignore
+    { name:"Booking Management", path: "booking-management", element: <ProtectedAdminRoute><BookingManagement /></ProtectedAdminRoute> },
   ];
 
 // prettier-ignore
-export const adminDashboardNames = ["Profile", "Room Management", "Slot Management" ,"Booking Management"];
+export const adminDashboardNames = ["Profile","Dashboard","Create Room", "All Rooms", "Room Management", "Create Slots", "All Slots" ,"Booking Management"];
 export const userDashboardNames = ["Profile", "My Bookings"];
 export const adminNavbarNames = ["Profile", "Dashboard"];
 export const userNavbarNames = [...userDashboardNames];

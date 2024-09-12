@@ -3,7 +3,7 @@ import { TNavbarItems, TNavbarRoutes, TRoutes } from "../types";
 
 export const generateNavbarItems = (navbarItems: TNavbarRoutes[]) => {
   const navbar = navbarItems.reduce((acc: TNavbarItems[], item) => {
-    if (item?.name && item?.path) {
+    if ((item?.name && item?.path) || item?.name === "Dashboard") {
       acc.push({
         name: item.name,
         to: item.path,

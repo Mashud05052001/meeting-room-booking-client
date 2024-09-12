@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hook";
 import { logout } from "../../redux/features/auth/auth.slice";
+import { toast } from "sonner";
 
 const UserMenu = () => {
   const [openUserMenu, setOpenUserManu] = useState(false);
@@ -18,14 +19,19 @@ const UserMenu = () => {
   const userInfo = useUserInfoFromToken();
   const dispatch = useAppDispatch();
 
+  const userImageText =
+    userInfo?.role === "user" ? "U" : userInfo?.role === "admin" ? "A" : "S.A";
+
   let userMenuItems;
   if (userInfo?.role === "user")
     userMenuItems = generateNavbarItems(generateRouteItems(userNavbarNames));
   else
     userMenuItems = generateNavbarItems(generateRouteItems(adminNavbarNames));
 
+  console.log(generateRouteItems(adminNavbarNames));
   const handleLogout = () => {
     dispatch(logout());
+    toast.success("User logout successfully ");
   };
 
   useEffect(() => {
@@ -49,13 +55,8 @@ const UserMenu = () => {
         <div ref={openUserMenuRef} className="h-10 md:ml-4 mr-3 2xl:mr-0">
           <button onClick={() => setOpenUserManu((prev) => !prev)}>
             <div className="flex items-center justify-center text-white text-xl font-semibold size-10 rounded-full bg-slate-500 object-cover duration-200 hover:scale-x-[98%] hover:opacity-80 shadow-md">
-              P
+              {userImageText}
             </div>
-            {/* <img
-              className="size-10 rounded-full bg-slate-500 object-cover duration-500 hover:scale-x-[98%] hover:opacity-80"
-              src="https://source.unsplash.com/300x300/?profile"
-              alt="avatar"
-            /> */}
           </button>
           <div
             className={`${
@@ -63,10 +64,6 @@ const UserMenu = () => {
             } absolute right-0 top-16 z-50 w-40 rounded-sm bg-slate-200 shadow-md font-medium flex flex-col`}
           >
             {userMenuItems?.map((item, idx) => (
-              //className={`rounded-sm px-6 py-2 cursor-pointer ${
-              //  openUserMenu ? "opacity-100 duration-200" : "opacity-0"
-              //}  `}
-              //onClick={() => setOpenUserManu(false)}
               <Link
                 to={`/dashboard/${item.to}`}
                 key={idx}

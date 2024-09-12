@@ -8,7 +8,7 @@ import {
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
 type TQInputProps = {
-  label: string;
+  label?: string;
   name: string;
   type: "text" | "email" | "number" | "textarea" | "password";
   required?: boolean;
@@ -38,7 +38,11 @@ const QInput = ({
     field: ControllerRenderProps<FieldValues, string>,
     error: FieldError | undefined
   ) => {
-    const { value: fieldValue, ...othersField } = field;
+    const {
+      value: fieldValue = "",
+      onChange: fieldOnChange,
+      ...restFieldProps
+    } = field;
     const commonClassName = `flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700 ${
       error ? "border-red-400" : ""
     }`;
@@ -50,9 +54,9 @@ const QInput = ({
             className={commonClassName}
             placeholder={placeholder}
             type={visiblePassword ? "text" : "password"}
-            value={fieldValue || ""}
+            value={fieldValue}
             disabled={disabled}
-            {...othersField}
+            {...restFieldProps}
             {...others}
           />
           <div
@@ -70,9 +74,9 @@ const QInput = ({
           rows={rows}
           className={`${commonClassName} h-auto`}
           placeholder={placeholder}
-          value={fieldValue || ""}
+          value={fieldValue}
           disabled={disabled}
-          {...othersField}
+          {...restFieldProps}
           {...others}
         />
       );
@@ -84,9 +88,13 @@ const QInput = ({
         type={type}
         min={min}
         max={max}
-        value={fieldValue || ""}
+        value={fieldValue}
+        onChange={(e) => {
+          const value = e.target.value;
+          fieldOnChange(type === "number" ? Number(value) : value);
+        }}
         disabled={disabled}
-        {...othersField}
+        {...restFieldProps}
         {...others}
       />
     );
@@ -97,22 +105,13 @@ const QInput = ({
       render={({ field, fieldState: { error } }) => (
         <div className={`relative ${className} `}>
           <div className="space-y-2 text-sm">
-            <label className="block text-zinc-700 dark:text-zinc-300 font-medium -mb-0.5">
-              {label}
-            </label>
+            {label && (
+              <label className="block text-zinc-700 dark:text-zinc-300 font-medium -mb-0.5">
+                {label}
+              </label>
+            )}
             {generateField(field, error)}
-            {/* {error && (
-              <small
-                style={{
-                  position: "absolute",
-                  left: "0.3rem",
-                  bottom: "-1.2rem",
-                  color: "red",
-                }}
-              >
-                {error?.message}
-              </small>
-            )} */}
+
             {error && (
               <div className="absolute left-1 bottom-[-1.4rem] text-red-500 whitespace-nowrap overflow-hidden text-ellipsis">
                 {error?.message!.length > 40 ? (

@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav className="flex items-center justify-between bg-gray py-2 text-black-600 relative">
       {/* Logo */}
-      <NavLink to={""}>
+      <NavLink to={"/home"}>
         <div className="scale-100 cursor-pointer rounded-2xl px-3 py-2 font-semibold text-black-700 transition-all duration-200 hover:scale-110">
           <h2 className="font-bold flex items-center justify-center ">
             <span className="text-2xl text-common-700">Q.</span>

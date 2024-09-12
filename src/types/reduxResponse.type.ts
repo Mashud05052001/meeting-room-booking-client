@@ -22,6 +22,7 @@ export type TMeta = {
 export type TSuccess = {
   success: boolean;
   message: string;
+  statusCode: number;
   data: any;
 };
 
@@ -37,6 +38,7 @@ export type TResponseMetaData<T> = {
 export type TResponseData<T> = {
   success: boolean;
   message: string;
+  statusCode: number;
   data: T;
 };
 

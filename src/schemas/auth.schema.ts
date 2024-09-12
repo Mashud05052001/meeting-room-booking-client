@@ -53,3 +53,28 @@ export const forgetPasswordValidationSchema = z.object({
     .string({ required_error: requiredMsg })
     .email({ message: "*Provide valid email" }),
 });
+
+export const changePasswordValidationSchema = z
+  .object({
+    oldPassword: z
+      .string({ required_error: requiredMsg })
+      .min(8, { message: "*Password must be at least 8 characters" })
+      .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+{}[\]'"<>,.?/]).+$/, {
+        message:
+          "*Password must include uppercase, lowercase, and special character",
+      }),
+    newPassword: z
+      .string({ required_error: requiredMsg })
+      .min(8, { message: "*Password must be at least 8 characters" })
+      .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+{}[\]'"<>,.?/]).+$/, {
+        message:
+          "*Password must include uppercase, lowercase, and special character",
+      }),
+    confirmNewPassword: z
+      .string({ required_error: requiredMsg })
+      .min(6, { message: "*Confirm your password" }),
+  })
+  .refine((data) => data.newPassword === data.confirmNewPassword, {
+    message: "*Passwords doesn't match",
+    path: ["confirmNewPassword"],
+  });

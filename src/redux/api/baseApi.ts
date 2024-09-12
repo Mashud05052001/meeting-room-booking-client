@@ -4,6 +4,6 @@ import { customBaseQuery } from "./apiBaseQuery";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: customBaseQuery,
-  tagTypes: [],
+  tagTypes: ["userInfo", "allUsers", "rooms"],
   endpoints: () => ({}),
 });

@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../components/layout/MainLayout";
 import ErrorPage from "../pages/errorPage/ErrorPage";
-import { generateRoutes } from "../utils/route.utils";
+import { generateRouteItems, generateRoutes } from "../utils/route.utils";
 import {
+  adminDashboardNames,
   commonRouterNavbarItemsInMainLayout,
-  routerNavbarItemsInDashboardLayout,
 } from "../constant/routes.constant";
 import Login from "../pages/authentication/login/Login";
 import Signup from "../pages/authentication/signup/Signup";
@@ -23,8 +23,7 @@ export const routes = createBrowserRouter([
   {
     path: "dashboard",
     element: <DashboardLayout />,
-    errorElement: <ErrorPage />,
-    children: generateRoutes(routerNavbarItemsInDashboardLayout),
+    children: generateRouteItems(adminDashboardNames),
   },
   {
     path: "/admin",
