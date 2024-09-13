@@ -53,7 +53,7 @@ export const routerNavbarItemsInDashboardLayout: TNavbarRoutesAllItemsExist[] =
   ];
 
 // prettier-ignore
-export const adminDashboardNames = ["Profile","Dashboard","Create Room", "All Rooms", "Room Management", "Create Slots", "All Slots" ,"Booking Management"];
+export const routerDashboardNames = ["Profile","My Bookings","Dashboard","Create Room", "All Rooms", "Room Management", "Create Slots", "All Slots" ,"Booking Management"];
 export const userDashboardNames = ["Profile", "My Bookings"];
 export const adminNavbarNames = ["Profile", "Dashboard"];
 export const userNavbarNames = [...userDashboardNames];

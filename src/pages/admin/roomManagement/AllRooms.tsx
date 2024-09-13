@@ -2,7 +2,9 @@ import EditRoomModal from "@/components/modal/EditRoomModal";
 import {
   useDeleteARoomMutation,
   useGetAllRoomsQuery,
-} from "@/redux/features/admin/admin.api";
+} from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
+
+import { TRoom } from "@/types";
 import type { TableColumnsType } from "antd";
 import { Popconfirm, Table, Tooltip } from "antd";
 import { useState } from "react";
@@ -22,7 +24,7 @@ type TAllRoomsType = {
 
 const AllRooms = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [userID, setUserID] = useState("");
+  const [roomInfo, setRoomInfo] = useState<TRoom | null>(null);
   const [openDeleteModalId, setOpenDeleteModalId] = useState<string | null>(
     null
   );
@@ -79,7 +81,7 @@ const AllRooms = () => {
     {
       title: "Action",
       key: "operation",
-      render: (text, record) => {
+      render: (_text, record) => {
         const showDeleteConfirm = () => {
           setOpenDeleteModalId(record?.key);
         };
@@ -105,7 +107,10 @@ const AllRooms = () => {
               <MdEdit
                 size={25}
                 onClick={() => {
-                  setUserID(record?.key);
+                  const findRoomInfo = allRooms?.data.find(
+                    (room) => room?._id === record?.key
+                  );
+                  setRoomInfo(findRoomInfo!);
                   setOpenModal(true);
                 }}
               />
@@ -170,8 +175,8 @@ const AllRooms = () => {
         <EditRoomModal
           openModal={openModal}
           setOpenModal={setOpenModal}
-          userID={userID}
-          setUserID={setUserID}
+          roomInfo={roomInfo}
+          setRoomInfo={setRoomInfo}
         />
       </div>
     </div>

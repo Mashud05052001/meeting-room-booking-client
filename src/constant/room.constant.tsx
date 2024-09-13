@@ -25,3 +25,11 @@ export const bookingRoomAmenitiesOptions: TSelectOptions[] = [
   { value: "Power Outlets", label: "Power Outlets" },
   { value: "Digital Signage", label: "Digital Signage" },
 ];
+
+export const slotDuration: TSelectOptions[] = [
+  { value: 20, label: "20 Minutes" },
+  { value: 30, label: "30 Minutes" },
+  { value: 40, label: "40 Minutes" },
+  { value: 50, label: "50 Minutes" },
+  { value: 60, label: "60 Minutes" },
+];

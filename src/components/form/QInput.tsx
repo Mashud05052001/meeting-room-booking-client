@@ -54,9 +54,8 @@ const QInput = ({
             className={commonClassName}
             placeholder={placeholder}
             type={visiblePassword ? "text" : "password"}
-            value={fieldValue}
             disabled={disabled}
-            {...restFieldProps}
+            {...field}
             {...others}
           />
           <div

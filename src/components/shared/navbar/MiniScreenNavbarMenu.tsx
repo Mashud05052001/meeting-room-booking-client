@@ -1,8 +1,8 @@
 import Hamburger from "hamburger-react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { commonRouterNavbarItemsInMainLayout } from "../../constant/routes.constant";
-import { generateNavbarItems } from "../../utils/route.utils";
+import { commonRouterNavbarItemsInMainLayout } from "../../../constant/routes.constant";
+import { generateNavbarItems } from "../../../utils/route.utils";
 
 const MiniScreenNavbarMenu = () => {
   const [openNavbarMenu, setOpenNavbarMenu] = useState(false);

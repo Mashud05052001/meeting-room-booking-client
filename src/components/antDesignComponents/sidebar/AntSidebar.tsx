@@ -1,17 +1,24 @@
-import { adminSidebarItems } from "@/constant/sidebarItems.constant";
+import {
+  adminSidebarItems,
+  userSidebarItems,
+} from "@/constant/sidebarItems.constant";
 import { Button, Layout, Menu } from "antd";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./slidebar.css";
 import useUserInfoFromToken from "@/hook/useUserInfoFromToken";
 
 const { Sider } = Layout;
 
 const AntSidebar = () => {
+  const location = useLocation();
+  const currentPathName = location?.pathname;
+  const currentSelectedItem =
+    currentPathName.split("/")[currentPathName.split("/").length - 1];
   const userInfo = useUserInfoFromToken();
   const [collapsed, setCollapsed] = useState(false);
-  const items =
-    userInfo?.role === "user" ? adminSidebarItems : adminSidebarItems;
+  const sidebarItems =
+    userInfo?.role === "user" ? userSidebarItems : adminSidebarItems;
 
   return (
     <Layout
@@ -38,9 +45,9 @@ const AntSidebar = () => {
 
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={[currentSelectedItem]}
           mode="inline"
-          items={items}
+          items={sidebarItems}
         />
       </Sider>
     </Layout>

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TRoom } from "@/types";
+import { TModifiedSlot, TRoom, TSlot } from "@/types";
 import { TReduxReponseWithoutMeta } from "@/types/reduxResponse.type";
 import { baseApi } from "../../api/baseApi";
 
@@ -66,6 +66,47 @@ const authApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["rooms"],
     }),
+
+    // Slots
+    createSlot: builder.mutation({
+      query: (payload) => {
+        return {
+          url: "/slots",
+          method: "POST",
+          body: payload,
+        };
+      },
+      invalidatesTags: ["slots"],
+      transformResponse: (res: TReduxReponseWithoutMeta<TSlot>) => {
+        return res;
+      },
+    }),
+    getSlots: builder.query({
+      query: (payload: Record<string, string>) => {
+        const params = new URLSearchParams();
+        for (const item in payload) {
+          params.append(item, payload[item]);
+        }
+        return {
+          url: "/slots/availability",
+          method: "GET",
+          params,
+        };
+      },
+      providesTags: ["slots"],
+      transformResponse: (res: TReduxReponseWithoutMeta<TModifiedSlot>) => {
+        return res;
+      },
+    }),
+    deleteASlot: builder.mutation({
+      query: (id: string) => {
+        return {
+          url: `/slots/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["slots"],
+    }),
   }),
 });
 
@@ -75,4 +116,7 @@ export const {
   useGetARoomQuery,
   useUpdateARoomMutation,
   useDeleteARoomMutation,
+  useCreateSlotMutation,
+  useGetSlotsQuery,
+  useDeleteASlotMutation,
 } = authApi;

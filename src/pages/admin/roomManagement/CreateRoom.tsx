@@ -4,7 +4,7 @@ import QImages from "@/components/form/QImages";
 import QInput from "@/components/form/QInput";
 import QSelect from "@/components/form/QSelect";
 import { bookingRoomAmenitiesOptions } from "@/constant/room.constant";
-import { useCreateRoomMutation } from "@/redux/features/admin/admin.api";
+import { useCreateRoomMutation } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
 import { addRoomValidationSchema } from "@/schemas/admin.schema";
 import { generateSingleImageURL } from "@/utils/generateImageUrl";
 import { zodResolver } from "@hookform/resolvers/zod";

@@ -1,9 +1,9 @@
 import { MdLogin } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import { commonRouterNavbarItemsInMainLayout } from "../../constant/routes.constant";
-import useUserInfoFromToken from "../../hook/useUserInfoFromToken";
-import "../../styles/navbar.style.css";
-import { generateNavbarItems } from "../../utils/route.utils";
+import { commonRouterNavbarItemsInMainLayout } from "../../../constant/routes.constant";
+import useUserInfoFromToken from "../../../hook/useUserInfoFromToken";
+import "../../../styles/navbar.style.css";
+import { generateNavbarItems } from "../../../utils/route.utils";
 import MiniScreenNavbarMenu from "./MiniScreenNavbarMenu";
 import UserMenu from "./UserMenu";
 

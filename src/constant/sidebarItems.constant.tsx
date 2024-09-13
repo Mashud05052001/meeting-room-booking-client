@@ -27,21 +27,40 @@ function getItem(
 export const adminSidebarItems: MenuItem[] = [
   getItem(
     <Link to={"/dashboard/profile"}>Profile</Link>,
-    "1",
+    "profile",
     <UserCircleIcon />
   ),
-  getItem(<Link to={"/dashboard"}>Dashboard</Link>, "2", <UserIcon />),
+  getItem(<Link to={"/dashboard"}>Dashboard</Link>, "dashboard", <UserIcon />),
   getItem("Room Management", "3", <HomeIcon />, [
-    getItem(<Link to={"/dashboard/create-room"}>Create Room</Link>, "4"),
-    getItem(<Link to={"/dashboard/all-rooms"}>All Rooms</Link>, "5"),
+    getItem(
+      <Link to={"/dashboard/create-room"}>Create Room</Link>,
+      "create-room"
+    ),
+    getItem(<Link to={"/dashboard/all-rooms"}>All Rooms</Link>, "all-rooms"),
   ]),
   getItem("Slots Management", "6", <ClockIcon />, [
-    getItem(<Link to={"/dashboard/create-slots"}>Create Slots</Link>, "7"),
-    getItem(<Link to={"/dashboard/all-slots"}>All Slots</Link>, "8"),
+    getItem(
+      <Link to={"/dashboard/create-slots"}>Create Slots</Link>,
+      "create-slots"
+    ),
+    getItem(<Link to={"/dashboard/all-slots"}>All Slots</Link>, "all-slots"),
   ]),
   getItem(
     <Link to={"/dashboard/booking-management"}>Booking Management</Link>,
-    "9",
+    "booking-management",
     <BookmarkIcon />
+  ),
+];
+
+export const userSidebarItems: MenuItem[] = [
+  getItem(
+    <Link to={"/dashboard/profile"}>Profile</Link>,
+    "profile",
+    <UserCircleIcon />
+  ),
+  getItem(
+    <Link to={"/dashboard/my-bookings"}>My Bookings</Link>,
+    "my-bookings",
+    <UserIcon />
   ),
 ];
