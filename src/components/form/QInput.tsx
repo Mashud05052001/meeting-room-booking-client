@@ -6,6 +6,7 @@ import {
   FieldValues,
 } from "react-hook-form";
 import { IoEye, IoEyeOff } from "react-icons/io5";
+import "@/styles/form.style.css";
 
 type TQInputProps = {
   label?: string;
@@ -43,7 +44,7 @@ const QInput = ({
       onChange: fieldOnChange,
       ...restFieldProps
     } = field;
-    const commonClassName = `flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700 ${
+    const commonClassName = `flex h-10 w-full rounded-md border px-3 py-2 text-sm focus:ring-1 focus-visible:outline-none dark:border-zinc-700 q-input ${
       error ? "border-red-400" : ""
     }`;
 

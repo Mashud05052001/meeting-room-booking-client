@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TModifiedSlot, TRoom, TSlot } from "@/types";
-import { TReduxReponseWithoutMeta } from "@/types/reduxResponse.type";
+import {
+  TReduxReponse,
+  TReduxReponseWithoutMeta,
+} from "@/types/reduxResponse.type";
 import { baseApi } from "../../api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
@@ -20,15 +23,25 @@ const authApi = baseApi.injectEndpoints({
       },
     }),
     getAllRooms: builder.query({
-      query: () => {
+      query: (payload: Record<string, unknown>[]) => {
+        const params = new URLSearchParams();
+        for (const item of payload) {
+          for (const objIdx in item) {
+            params.append(objIdx, item[objIdx] as string);
+          }
+        }
         return {
           url: "/rooms",
           method: "GET",
+          params,
         };
       },
       providesTags: ["rooms"],
-      transformResponse: (res: TReduxReponseWithoutMeta<TRoom[]>) => {
-        return res;
+      transformResponse: (res: TReduxReponse<TRoom[]>) => {
+        return {
+          data: res?.data?.data,
+          meta: res?.data?.meta,
+        };
       },
     }),
     getARoom: builder.query({
@@ -38,9 +51,8 @@ const authApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: ["rooms"],
       transformResponse: (res: TReduxReponseWithoutMeta<TRoom>) => {
-        return res;
+        return res.data;
       },
     }),
     updateARoom: builder.mutation({
@@ -95,7 +107,7 @@ const authApi = baseApi.injectEndpoints({
       },
       providesTags: ["slots"],
       transformResponse: (res: TReduxReponseWithoutMeta<TModifiedSlot>) => {
-        return res;
+        return res.data;
       },
     }),
     deleteASlot: builder.mutation({
@@ -106,6 +118,17 @@ const authApi = baseApi.injectEndpoints({
         };
       },
       invalidatesTags: ["slots"],
+    }),
+    getAllSlotsDateOfARoom: builder.query({
+      query: (id: string) => {
+        return {
+          url: `/slots/dates/${id}`,
+          method: "GET",
+        };
+      },
+      transformResponse: (res: TReduxReponseWithoutMeta<string[] | []>) => {
+        return res.data;
+      },
     }),
   }),
 });
@@ -119,4 +142,5 @@ export const {
   useCreateSlotMutation,
   useGetSlotsQuery,
   useDeleteASlotMutation,
+  useGetAllSlotsDateOfARoomQuery,
 } = authApi;

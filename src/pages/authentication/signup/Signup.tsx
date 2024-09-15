@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import FormButton from "../../../components/button/FormButton";
+import FilledButton from "../../../components/button/FilledButton";
 import CenterContainer from "../../../components/container/CenterContainer";
 import QForm from "../../../components/form/QForm";
 import QInput from "../../../components/form/QInput";
@@ -102,7 +102,7 @@ const Signup = () => {
               <p className="opacity-0 select-none">No error</p>
             )}
 
-            <FormButton isLoading={isSignupLoading} />
+            <FilledButton isLoading={isSignupLoading} />
 
             <p className="text-center text-sm text-zinc-700 dark:text-zinc-300">
               Already have an account!

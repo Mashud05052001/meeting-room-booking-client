@@ -10,7 +10,7 @@ import { decodeToken } from "../../../utils/function";
 import { setUser, TAuthState } from "../../../redux/features/auth/auth.slice";
 import { useAppDispatch } from "../../../redux/hook";
 import { TError } from "../../../types/reduxResponse.type";
-import FormButton from "../../../components/button/FormButton";
+import FilledButton from "../../../components/button/FilledButton";
 import { toast } from "sonner";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import OpacityMotion from "../../../components/motionDiv/OpacityMotion";
@@ -23,7 +23,9 @@ const Login = () => {
   const [forgetPassModal, setForgetPassModal] = useState(false);
   const [loginUser, { isLoading: isLoginLoading, error }] = useLoginMutation();
   const dispatch = useAppDispatch();
-  const from = location.state?.from?.pathname || "/";
+  const from =
+    location.state?.returnUrl || location.state?.from?.pathname || "/";
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const loadingId = toast.loading("Logging in...");
     try {
@@ -83,7 +85,7 @@ const Login = () => {
                 </p>
               </div>
 
-              <FormButton isLoading={isLoginLoading} />
+              <FilledButton isLoading={isLoginLoading} />
 
               <p className="text-center text-sm text-zinc-700 dark:text-zinc-300">
                 Don&apos;t have an account?

@@ -6,7 +6,7 @@ import QForm from "../../../components/form/QForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { resetPasswordValidationSchema } from "../../../schemas/auth.schema";
 import QInput from "../../../components/form/QInput";
-import FormButton from "../../../components/button/FormButton";
+import FilledButton from "../../../components/button/FilledButton";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { TError } from "../../../types/reduxResponse.type";
 import axios, { AxiosError } from "axios";
@@ -84,7 +84,7 @@ const ResetPassword = () => {
               </a>
             </div> */}
 
-            <FormButton isLoading={false} buttonText="Reset Password" />
+            <FilledButton isLoading={false} buttonText="Reset Password" />
           </div>
         </QForm>
       </OpacityMotion>

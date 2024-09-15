@@ -1,4 +1,4 @@
-import FormButton from "@/components/button/FormButton";
+import FormButton from "@/components/button/FilledButton";
 import QForm from "@/components/form/QForm";
 import QImages from "@/components/form/QImages";
 import QInput from "@/components/form/QInput";

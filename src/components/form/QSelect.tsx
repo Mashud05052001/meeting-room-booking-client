@@ -1,5 +1,6 @@
 import { Form, Select, Tooltip } from "antd";
 import { Controller } from "react-hook-form";
+import "@/styles/form.style.css";
 
 type TQSelectProps = {
   name: string;

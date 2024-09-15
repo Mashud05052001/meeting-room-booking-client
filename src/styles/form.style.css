@@ -1,0 +1,15 @@
+.ant-picker,
+.q-input,
+.ant-select-selector {
+  border-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+.ant-picker-input input::placeholder,
+.q-input::placeholder,
+.ant-select-selector::placeholder {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.ant-upload-select {
+  border-color: rgba(0, 0, 0, 0.5) !important;
+}

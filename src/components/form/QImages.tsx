@@ -3,6 +3,7 @@ import { Upload } from "antd";
 import ImgCrop from "antd-img-crop";
 import { useState } from "react";
 import { Controller } from "react-hook-form";
+import "@/styles/form.style.css";
 
 type FileType = File;
 type TQImagesProps = {

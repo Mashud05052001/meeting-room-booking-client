@@ -36,6 +36,7 @@ const QDatePicker = ({
                 style={{ width: "100%", height: "2.5rem" }}
                 disabledDate={(current) => {
                   const today = new Date();
+                  today.setHours(0, 0, 0, 0);
                   if (
                     disabledAllPreviousDate &&
                     current &&

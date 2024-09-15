@@ -1,22 +1,22 @@
-import Dashboard from "@/pages/admin/dashboard/Dashboard";
-import AllRooms from "@/pages/admin/roomManagement/AllRooms";
-import CreateRoom from "@/pages/admin/roomManagement/CreateRoom";
-import AllSlots from "@/pages/admin/slotManagement/AllSlots";
-import CreateSlots from "@/pages/admin/slotManagement/CreateSlots";
-import About from "../pages/about/About";
-import BookingManagement from "../pages/admin/bookingManagement/BookingManagement";
-import Contact from "../pages/contact/Contact";
 import Home from "../pages/home/Home";
-import AllMeetingRooms from "../pages/meetingRooms/AllMeetingRooms";
-import Checkout from "../pages/payment/Checkout";
+import About from "../pages/about/About";
+import Contact from "../pages/contact/Contact";
 import Profile from "../pages/profile/Profile";
-import BookingForm from "../pages/user/bookingForm/BookingForm";
-import MyBookings from "../pages/user/myBookings/MyBookings";
-import SingleMeetingRoom from "../pages/user/singleMeetingRoomDetails/SingleMeetingRoomDetails";
-import ProtectedAdminRoute from "../routes/ProtectedAdminRoute";
+import Checkout from "../pages/payment/Checkout";
 import ProtectedRoute from "../routes/ProtectedRoute";
+import Dashboard from "@/pages/admin/dashboard/Dashboard";
+import MyBookings from "../pages/user/myBookings/MyBookings";
+import AllSlots from "@/pages/admin/slotManagement/AllSlots";
+import AllRooms from "@/pages/admin/roomManagement/AllRooms";
 import ProtectedUserRoute from "../routes/ProtectedUserRoutes";
+import BookingForm from "../pages/user/bookingForm/BookingForm";
+import ProtectedAdminRoute from "../routes/ProtectedAdminRoute";
+import CreateRoom from "@/pages/admin/roomManagement/CreateRoom";
+import CreateSlots from "@/pages/admin/slotManagement/CreateSlots";
+import AllMeetingRooms from "../pages/meetingRooms/AllMeetingRooms";
 import { TNavbarRoutes, TNavbarRoutesAllItemsExist } from "../types";
+import BookingManagement from "../pages/admin/bookingManagement/BookingManagement";
+import SingleMeetingRoom from "@/pages/user/singleMeetingRoom/SingleMeetingRoomDetails";
 
 export const commonRouterNavbarItemsInMainLayout: TNavbarRoutes[] = [
   { name: "Home", path: "", element: <Home /> },
@@ -25,9 +25,9 @@ export const commonRouterNavbarItemsInMainLayout: TNavbarRoutes[] = [
   { name: "About Us", path: "about-us", element: <About /> },
   { name: "Contact Us", path: "contact-us", element: <Contact /> },
   // prettier-ignore
-  { path: "meeting-room/:roomId", element: <ProtectedUserRoute> <SingleMeetingRoom /></ProtectedUserRoute> },
+  { path: "meeting-room/:id", element: <ProtectedUserRoute> <SingleMeetingRoom /></ProtectedUserRoute> },
   // prettier-ignore
-  { path: "booking-form", element: <ProtectedUserRoute><BookingForm /></ProtectedUserRoute> },
+  { path: "booking-form/:id", element: <ProtectedUserRoute><BookingForm /></ProtectedUserRoute> },
   // prettier-ignore
   { path: "checkout", element: <ProtectedUserRoute><Checkout /></ProtectedUserRoute> },
 ];

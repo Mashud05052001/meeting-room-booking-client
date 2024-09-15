@@ -4,11 +4,10 @@ import { TRoom } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { RxCross2 } from "react-icons/rx";
-import FormButton from "../button/FormButton";
+import FilledButton from "../button/FilledButton";
 import QForm from "../form/QForm";
 import QInput from "../form/QInput";
 import QSelect from "../form/QSelect";
-import { useUpdateARoomMutation } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
 
 // TODO : ROOM EDITING REMAINING
 const EditRoomModal = ({
@@ -22,7 +21,7 @@ const EditRoomModal = ({
   roomInfo: TRoom | null;
   setRoomInfo: React.Dispatch<React.SetStateAction<TRoom | null>>;
 }) => {
-  const [updateARoom, { isLoading }] = useUpdateARoomMutation();
+  // const [updateARoom, { isLoading }] = useUpdateARoomMutation();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
@@ -105,7 +104,8 @@ const EditRoomModal = ({
             )}
           </div>
           <div className="mt-10">
-            <FormButton buttonText="Update Room" isLoading={isLoading} />
+            {/* <FilledButton buttonText="Update Room" isLoading={isLoading} /> */}
+            <FilledButton buttonText="Update Room" />
           </div>
         </QForm>
       </div>

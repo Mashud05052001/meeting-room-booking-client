@@ -29,8 +29,9 @@ const AllRooms = () => {
     null
   );
 
-  const { data: allRooms, isLoading: usersDataLoading } =
-    useGetAllRoomsQuery(undefined);
+  const { data: allRooms, isLoading: usersDataLoading } = useGetAllRoomsQuery(
+    []
+  );
   const [deleteRoom, { isLoading: deleteRoomLoading }] =
     useDeleteARoomMutation();
 

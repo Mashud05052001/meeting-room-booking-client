@@ -3,7 +3,7 @@ import { Dispatch } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { RxCross2 } from "react-icons/rx";
 import { toast } from "sonner";
-import FormButton from "../../../components/button/FormButton";
+import FilledButton from "../../../components/button/FilledButton";
 import QForm from "../../../components/form/QForm";
 import QInput from "../../../components/form/QInput";
 import { useForgetPassowrdMutation } from "../../../redux/features/auth/auth.api";
@@ -95,7 +95,7 @@ const ForgetPassword = ({
                 )}
               </div>
               <div className="flex justify-start gap-2 ">
-                <FormButton isLoading={isLoading} />
+                <FilledButton isLoading={isLoading} />
               </div>
             </div>
           </QForm>
