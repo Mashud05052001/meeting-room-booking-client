@@ -3,6 +3,7 @@ import {
   useDeleteASlotMutation,
   useGetSlotsQuery,
 } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
+import "@/styles/table.style.css";
 
 import { TRoom, TSlotsFlatData } from "@/types";
 import { generateSlotsFlatData } from "@/utils/function";
@@ -29,7 +30,7 @@ const AllSlots = () => {
     useDeleteASlotMutation();
 
   let allSlots: TSlotsFlatData[] = [];
-  if (slotsData?.success) allSlots = generateSlotsFlatData(slotsData?.data);
+  if (slotsData?.length !== 0) allSlots = generateSlotsFlatData(slotsData!);
 
   const columns: TableColumnsType<TAllSlotsType> = [
     {
@@ -58,6 +59,20 @@ const AllSlots = () => {
     {
       title: "Price",
       dataIndex: "pricePerSlot",
+      render: (price) => <p>${price}</p>,
+    },
+    {
+      title: <p>Status</p>,
+      dataIndex: "isBooked",
+      render: (isBooked) => (
+        <div>
+          {isBooked ? (
+            <p className="font-semibold text-green-600">Booked</p>
+          ) : (
+            <p className="font-semibold text-red-600">Not Booked</p>
+          )}
+        </div>
+      ),
     },
 
     {
@@ -83,8 +98,12 @@ const AllSlots = () => {
         };
 
         return (
-          <div className="bg-white duration-100 flex space-x-4 items-center">
-            <div className="hover:cursor-pointer hover:text-[#1677ff] duration-100 w-fit">
+          <div className={`bg-white duration-100 flex space-x-4 items-center`}>
+            <div
+              className={`hover:cursor-pointer hover:text-[#1677ff] duration-100 w-fit ${
+                record?.isBooked && "-z-50 opacity-0"
+              }`}
+            >
               <MdEdit
                 size={25}
                 onClick={() => {
@@ -148,6 +167,7 @@ const AllSlots = () => {
     <div className="mt-10">
       <h1 className="text-3xl font-semibold mb-5 ml-3">All Slots</h1>
       <Table
+        className="custom-scrollbar"
         columns={columns}
         dataSource={roomsTableData}
         pagination={false}

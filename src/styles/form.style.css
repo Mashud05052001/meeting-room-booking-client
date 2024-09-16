@@ -18,7 +18,6 @@
   color: rgba(0, 0, 0, 0.5) !important;
 }
 
-/* .ant-picker-date-panel .ant-picker-cell-hover .ant-picker-cell-inner { */
 .ant-picker-date-panel .ant-picker-cell-in-view .ant-picker-cell-inner {
   font-weight: 700;
 

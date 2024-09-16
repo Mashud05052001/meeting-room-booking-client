@@ -1,3 +1,4 @@
+import FilledButton from "@/components/button/FilledButton";
 import QForm from "@/components/form/QForm";
 import QInput from "@/components/form/QInput";
 import MainLoading from "@/components/loading/MainLoading";
@@ -66,13 +67,12 @@ const Profile = () => {
       email: user?.email,
     };
     if (profilePicture) updatedData.profilePicture = profilePicture;
-
+    console.log(updatedData);
     try {
       const result = (await updateProfile(updatedData).unwrap()) as TSuccess;
-      console.log(result);
-      if (result?.success) toast.success("Profile updated successfully");
+      if (result?.success)
+        toast.success("Profile update successfully", { id: loadingId });
       setIsEdit(false);
-      toast.success("Profile update successfully", { id: loadingId });
     } catch (error) {
       console.log(error);
       toast.error("Profile update failed.", { id: loadingId });
@@ -165,14 +165,10 @@ const Profile = () => {
                   >
                     Cancle
                   </Button>
-                  <Button
-                    htmlType="submit"
-                    type="text"
-                    size="large"
-                    className="border-2 border-gray-400 font-medium"
-                  >
-                    Save
-                  </Button>
+                  <FilledButton
+                    buttonText="Save"
+                    className="border-2 px-8 font-medium"
+                  ></FilledButton>
                 </div>
               </div>
             )}

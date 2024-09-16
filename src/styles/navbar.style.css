@@ -23,7 +23,7 @@
 } */
 
 .navbar-items .active {
-  color: #8f7d51;
+  color: #003669;
   position: relative;
 }
 
@@ -32,7 +32,7 @@
   content: "";
   height: 3px;
   width: 0;
-  background: #b39c65;
+  background: #003669;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -50,7 +50,7 @@
 
 .navbar-items1 .active {
   color: white;
-  background: #b39c65;
+  background: #003669;
   overflow: hidden;
   transition: all 1s ease-in-out;
 }

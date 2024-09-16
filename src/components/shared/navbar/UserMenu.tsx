@@ -76,7 +76,7 @@ const UserMenu = () => {
           >
             {userMenuItems?.map((item, idx) => (
               <Link
-                to={`/dashboard/${item.to}`}
+                to={`${item?.to ? `/dashboard/${item.to}` : "/dashboard"}`}
                 key={idx}
                 className="px-6 py-3 hover:bg-slate-300"
               >

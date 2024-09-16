@@ -42,3 +42,15 @@ export type TSlotsFlatData = {
   isBooked: boolean;
   isDeleted: boolean;
 };
+
+export type TBooking<T, Q> = {
+  _id: string;
+  room: T;
+  slots: Q;
+  date: string;
+  totalAmount: number;
+  isConfirmed: "confirmed" | "unconfirmed" | "canceled";
+  isDeleted: boolean;
+  paymentStatus: "paid" | "non-paid" | "";
+  transactionId: string;
+};

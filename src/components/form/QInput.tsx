@@ -56,7 +56,9 @@ const QInput = ({
             placeholder={placeholder}
             type={visiblePassword ? "text" : "password"}
             disabled={disabled}
-            {...field}
+            value={fieldValue} // Always controlled
+            onChange={fieldOnChange}
+            {...restFieldProps}
             {...others}
           />
           <div
@@ -71,12 +73,11 @@ const QInput = ({
     if (type === "textarea") {
       return (
         <textarea
-          rows={rows}
           className={`${commonClassName} h-auto`}
+          rows={rows}
           placeholder={placeholder}
-          value={fieldValue}
           disabled={disabled}
-          {...restFieldProps}
+          {...field}
           {...others}
         />
       );

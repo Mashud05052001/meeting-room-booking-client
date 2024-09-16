@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { TModifiedSlot, TRoom, TSlot } from "@/types";
 import {
+  TModifiedSlot,
   TReduxReponse,
   TReduxReponseWithoutMeta,
-} from "@/types/reduxResponse.type";
+  TRoom,
+  TSlot,
+} from "@/types";
+
 import { baseApi } from "../../api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
@@ -136,7 +139,6 @@ const authApi = baseApi.injectEndpoints({
         return res.data[0];
       },
     }),
-
     deleteASlot: builder.mutation({
       query: (id: string) => {
         return {

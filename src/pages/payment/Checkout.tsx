@@ -66,7 +66,7 @@ const Checkout = () => {
       customerPhone: userInfo?.phone,
       cancleUrl: `${import.meta.env.VITE_FRONTEND_URL}/meeting-room/${
         room?._id
-      }?status=payment_failed`,
+      }?status=payment_canceled`,
     };
     try {
       const payment = await makePayment(bookingsData).unwrap();

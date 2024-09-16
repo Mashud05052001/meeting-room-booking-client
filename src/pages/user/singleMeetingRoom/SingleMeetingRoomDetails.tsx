@@ -3,7 +3,7 @@ import ScrollToTopContainer from "@/components/container/ScrollToTopContainer";
 import BookingForm from "@/components/modal/modalChildren/BookingForm";
 import ModalContainer from "@/components/modal/ModalContainer";
 import SingleRoomSkeleton from "@/components/skeleton/SingleRoomSkeleton";
-import { useDeleteBookingPermanentlyMutation } from "@/redux/features/booking/booking.api";
+import { useCanceledBookingMutation } from "@/redux/features/booking/booking.api";
 import {
   useGetAllSlotsDateOfARoomQuery,
   useGetARoomQuery,
@@ -27,8 +27,7 @@ const SingleMeetingRoom = () => {
   const { data: allDates = [], isLoading: allDatesLoading } =
     useGetAllSlotsDateOfARoomQuery(roomId!, { skip: !roomId });
 
-  const [deleteTemporaryUnPaidBookingPermanently] =
-    useDeleteBookingPermanentlyMutation();
+  const [canceledBookingIfPaymentCanceled] = useCanceledBookingMutation();
 
   useEffect(() => {
     if (roomInfo) {
@@ -44,18 +43,17 @@ const SingleMeetingRoom = () => {
   // delete bookings if it was cancelled
   useEffect(() => {
     const searchQuery = location.search;
-    if (searchQuery?.includes("?status=payment_failed&bookingId=")) {
-      console.log("object");
+    if (searchQuery?.includes("?status=payment_canceled&bookingId=")) {
       toast.error("Payment cancelled.");
       const bookingId = searchQuery.split("bookingId=")[1] as string;
       const handlePaymentCancellation = async () => {
         setOpenModal(false);
-        await deleteTemporaryUnPaidBookingPermanently(bookingId).unwrap();
+        await canceledBookingIfPaymentCanceled(bookingId).unwrap();
         return <Navigate to={location.pathname} />;
       };
       handlePaymentCancellation();
     }
-  }, [deleteTemporaryUnPaidBookingPermanently, location]);
+  }, [canceledBookingIfPaymentCanceled, location]);
 
   if (isLoading) {
     return <SingleRoomSkeleton />;
@@ -136,8 +134,8 @@ const SingleMeetingRoom = () => {
           </div>
           <div className="mb-6">
             <div className="flex">
-              <span>Features:</span>
-              <span className="font-semibold ml-3 md:w-8/12 ld:w-1/2 w-10/12 ">
+              <span>Amenities:</span>
+              <span className="ml-3 md:w-8/12 ld:w-1/2 w-10/12 ">
                 {roomInfo?.amenities.join(", ")}
               </span>
             </div>
