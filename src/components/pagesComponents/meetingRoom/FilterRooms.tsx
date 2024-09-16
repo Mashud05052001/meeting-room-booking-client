@@ -1,4 +1,4 @@
-import FormButton from "@/components/button/FilledButton";
+import FilledButton from "@/components/button/FilledButton";
 import { Select, Slider } from "antd";
 import Search from "antd/es/input/Search";
 import { useEffect, useState } from "react";
@@ -152,7 +152,7 @@ const FilterRooms = ({ setSearchQuery }: TFilterRoomsProps) => {
           />
         </div>
         <div onClick={resetValues}>
-          <FormButton buttonText="Reset" className="w-[100%] md:w-[85%]" />
+          <FilledButton buttonText="Reset" className="w-[100%] md:w-[85%]" />
         </div>
       </div>
     </div>

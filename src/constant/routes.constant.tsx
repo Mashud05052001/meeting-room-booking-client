@@ -9,7 +9,6 @@ import MyBookings from "../pages/user/myBookings/MyBookings";
 import AllSlots from "@/pages/admin/slotManagement/AllSlots";
 import AllRooms from "@/pages/admin/roomManagement/AllRooms";
 import ProtectedUserRoute from "../routes/ProtectedUserRoutes";
-import BookingForm from "../pages/user/bookingForm/BookingForm";
 import ProtectedAdminRoute from "../routes/ProtectedAdminRoute";
 import CreateRoom from "@/pages/admin/roomManagement/CreateRoom";
 import CreateSlots from "@/pages/admin/slotManagement/CreateSlots";
@@ -17,6 +16,7 @@ import AllMeetingRooms from "../pages/meetingRooms/AllMeetingRooms";
 import { TNavbarRoutes, TNavbarRoutesAllItemsExist } from "../types";
 import BookingManagement from "../pages/admin/bookingManagement/BookingManagement";
 import SingleMeetingRoom from "@/pages/user/singleMeetingRoom/SingleMeetingRoomDetails";
+import ProtectedCheckout from "@/routes/ProtectedCheckout";
 
 export const commonRouterNavbarItemsInMainLayout: TNavbarRoutes[] = [
   { name: "Home", path: "", element: <Home /> },
@@ -27,9 +27,9 @@ export const commonRouterNavbarItemsInMainLayout: TNavbarRoutes[] = [
   // prettier-ignore
   { path: "meeting-room/:id", element: <ProtectedUserRoute> <SingleMeetingRoom /></ProtectedUserRoute> },
   // prettier-ignore
-  { path: "booking-form/:id", element: <ProtectedUserRoute><BookingForm /></ProtectedUserRoute> },
+  // { path: "booking-form/:id", element: <ProtectedUserRoute><BookingForm /></ProtectedUserRoute> },
   // prettier-ignore
-  { path: "checkout", element: <ProtectedUserRoute><Checkout /></ProtectedUserRoute> },
+  { path: "checkout", element: <ProtectedCheckout><Checkout /></ProtectedCheckout> },
 ];
 
 export const routerNavbarItemsInDashboardLayout: TNavbarRoutesAllItemsExist[] =

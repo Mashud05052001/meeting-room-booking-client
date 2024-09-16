@@ -100,7 +100,7 @@ const authApi = baseApi.injectEndpoints({
           params.append(item, payload[item]);
         }
         return {
-          url: "/slots/availability",
+          url: "/slots",
           method: "GET",
           params,
         };
@@ -110,6 +110,33 @@ const authApi = baseApi.injectEndpoints({
         return res.data;
       },
     }),
+    getSingleSlot: builder.query({
+      query: (id: string) => {
+        return {
+          url: `/slots/${id}`,
+          method: "GET",
+        };
+      },
+      transformResponse: (res: TReduxReponseWithoutMeta<TSlot>) => {
+        return res.data;
+      },
+    }),
+    getMultipleSlots: builder.query({
+      query: (payload: string[]) => {
+        const body = { slots: payload };
+        return {
+          url: `/slots/multiple`,
+          method: "POST",
+          body,
+        };
+      },
+      transformResponse: (
+        res: TReduxReponseWithoutMeta<{ slots: TSlot[]; room: TRoom }[]>
+      ) => {
+        return res.data[0];
+      },
+    }),
+
     deleteASlot: builder.mutation({
       query: (id: string) => {
         return {
@@ -141,6 +168,8 @@ export const {
   useDeleteARoomMutation,
   useCreateSlotMutation,
   useGetSlotsQuery,
+  useGetSingleSlotQuery,
+  useGetMultipleSlotsQuery,
   useDeleteASlotMutation,
   useGetAllSlotsDateOfARoomQuery,
 } = authApi;

@@ -84,7 +84,7 @@ const ResetPassword = () => {
               </a>
             </div> */}
 
-            <FilledButton isLoading={false} buttonText="Reset Password" />
+            <FilledButton buttonText="Reset Password" />
           </div>
         </QForm>
       </OpacityMotion>

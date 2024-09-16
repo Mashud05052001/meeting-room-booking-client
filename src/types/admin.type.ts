@@ -12,7 +12,7 @@ export type TRoom = {
 
 export type TSlot = {
   _id: string;
-  room: string;
+  room: string | TRoom;
   date: string;
   startTime: string;
   endTime: string;

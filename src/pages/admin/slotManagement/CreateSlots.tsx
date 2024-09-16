@@ -1,4 +1,4 @@
-import FormButton from "@/components/button/FilledButton";
+import FilledButton from "@/components/button/FilledButton";
 import QDatePicker from "@/components/form/QDatePicker";
 import QForm from "@/components/form/QForm";
 import QSelect from "@/components/form/QSelect";
@@ -8,11 +8,11 @@ import {
   useCreateSlotMutation,
   useGetAllRoomsQuery,
 } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
-import { TError, TSelectOptions } from "@/types";
-import { FieldValues, SubmitHandler } from "react-hook-form";
-import moment from "moment";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { createSlotsValidationSchema } from "@/schemas/admin.schema";
+import { TError, TSelectOptions } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import moment from "moment";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
 const CreateSlots = () => {
@@ -80,7 +80,7 @@ const CreateSlots = () => {
           </button> */}
         </div>
         <div className="mt-10">
-          <FormButton buttonText="Create Slots" isLoading={isLoading} />
+          <FilledButton buttonText="Create Slots" isLoading={isLoading} />
         </div>
       </QForm>
     </div>

@@ -1,28 +1,29 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import FilledButton from "@/components/button/FilledButton";
 import useUserInfoFromToken from "@/hook/useUserInfoFromToken";
 import { useGetUserQuery } from "@/redux/features/auth/auth.api";
 import {
   useGetAllSlotsDateOfARoomQuery,
   useGetSlotsQuery,
 } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
-import "@/styles/form.style.css";
 import { TSelectOptions } from "@/types";
-import { DatePicker, Select } from "antd";
+import { DatePicker, Select, Tooltip } from "antd";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "@/styles/form.style.css";
 
 type TCurrentSlot = {
   value: string;
   data: string;
 };
 
-const BookingForm = () => {
-  const { id: roomId } = useParams();
+const BookingForm = ({ roomId }: { roomId: string; openModal: boolean }) => {
   const userTokenInfo = useUserInfoFromToken();
   const [selectedDate, setSelectedDate] = useState<string>("");
-  const [slotId, setSlotId] = useState<string>("");
-  const [query, setQuery] = useState<Record<string, string | boolean>>({
+  const [selectedSlotsId, setSelectedSlotsId] = useState<string[]>([]);
+  const [query, setQuery] = useState<Record<string, string>>({
     roomId: roomId!,
-    isBooked: false,
+    isBooked: "false",
   });
   const [slotsAccordingDate, setSlotsAccordingDate] = useState<TCurrentSlot[]>(
     []
@@ -37,7 +38,7 @@ const BookingForm = () => {
     email: userTokenInfo?.email || "",
   });
   const { data: allDates = [], isLoading: allDatesLoading } =
-    useGetAllSlotsDateOfARoomQuery(roomId!);
+    useGetAllSlotsDateOfARoomQuery(roomId!, { skip: !roomId });
 
   const userInfo = userData?.data;
 
@@ -58,8 +59,9 @@ const BookingForm = () => {
       setSlotsAccordingDate(newArr);
     }
   }, [allSlotsInfo]);
+
   return (
-    <div className="mt-12 sm:w-8/12 xl:w-7/12 mx-auto p-8 border-2 rounded-md shadow-md space-y-6">
+    <div className=" mx-auto  rounded-md  space-y-6">
       <h1 className="mb-6 text-3xl font-semibold ">Bookings</h1>
       {/* User Information */}
       <div>
@@ -115,6 +117,7 @@ const BookingForm = () => {
       <div>
         <h1 className="mb-2 text-lg font-semibold">Booking Information</h1>
         <div className="ml-4 space-y-8 md:space-y-0 grid md:grid-cols-2 gap-x-8">
+          {/* Booking Date */}
           <div>
             <label htmlFor="date">Select your booking date: </label>
             <DatePicker
@@ -125,28 +128,32 @@ const BookingForm = () => {
                 height: "2.5rem",
                 marginTop: "0.5rem",
               }}
+              // TODO : calender unexpected behaviour
+              // value={selectedDate ? moment(selectedDate, "YYYY-MM-DD") : null}
               disabledDate={(current) => {
                 const today = new Date();
                 today.setHours(0, 0, 0, 0);
                 const isBeforeToday = current && current.toDate() < today;
                 const formattedDate = current.format("YYYY-MM-DD");
                 const isUnavailableDate = !allDates.includes(formattedDate);
-
                 return isBeforeToday || isUnavailableDate;
               }}
               onChange={(date) => {
                 const formedDate = date.format("YYYY-MM-DD");
                 setQuery({ ...query, date: formedDate });
                 setSelectedDate(formedDate);
-                // handleDateChange(formedDate);
               }}
               disabled={allDatesLoading || slotsDataLoading}
             />
           </div>
+          {/* Booking Slot */}
           <div>
-            <label htmlFor="slot">Select your booking slot: </label>
+            <div>
+              <label htmlFor="slot">Select your booking slot: </label>
+            </div>
             <Select
               showSearch
+              mode="multiple"
               placeholder="Select a slot"
               style={{
                 width: "100%",
@@ -154,13 +161,47 @@ const BookingForm = () => {
                 marginTop: "0.5rem",
               }}
               onChange={(data) => {
-                setSlotId(data);
+                setSelectedSlotsId(data);
               }}
+              allowClear
               options={slotsOptions}
               disabled={!selectedDate || slotsDataLoading || slotsDataFetching}
+              maxTagPlaceholder={(omittedValues) => (
+                <Tooltip
+                  overlayStyle={{ pointerEvents: "none" }}
+                  title={omittedValues.map(({ label }) => label).join(", ")}
+                >
+                  <span>Hover Me</span>
+                </Tooltip>
+              )}
+              notFoundContent="All slots already have booked on this day. Please select another day."
             />
           </div>
         </div>
+      </div>
+      {/* Checkout button */}
+      <div>
+        <Tooltip
+          placement="topLeft"
+          title={
+            !selectedSlotsId
+              ? "Please select booking date & slot to checkout"
+              : null
+          }
+        >
+          <NavLink
+            to={"/checkout"}
+            state={{
+              slotsId: selectedSlotsId,
+            }}
+          >
+            <FilledButton
+              type="button"
+              buttonText="Proceed to checkout"
+              disabled={!selectedSlotsId.length}
+            />
+          </NavLink>
+        </Tooltip>
       </div>
     </div>
   );

@@ -1,29 +1,68 @@
 import FilledButton from "@/components/button/FilledButton";
+import ScrollToTopContainer from "@/components/container/ScrollToTopContainer";
+import BookingForm from "@/components/modal/modalChildren/BookingForm";
+import ModalContainer from "@/components/modal/ModalContainer";
 import SingleRoomSkeleton from "@/components/skeleton/SingleRoomSkeleton";
-import { useGetARoomQuery } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
-import { Breadcrumb } from "antd";
+import { useDeleteBookingPermanentlyMutation } from "@/redux/features/booking/booking.api";
+import {
+  useGetAllSlotsDateOfARoomQuery,
+  useGetARoomQuery,
+} from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
+import { Breadcrumb, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { FaHome } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useLocation, useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const SingleMeetingRoom = () => {
+  const location = useLocation();
+  const [roomId, setRoomId] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const [coverImage, setCoverImage] = useState("");
-  const { id: roomId } = useParams();
+  const { id: urlRoomId } = useParams();
 
-  const { data: roomInfo, isLoading } = useGetARoomQuery(roomId as string);
+  const { data: roomInfo, isLoading } = useGetARoomQuery(roomId, {
+    skip: !roomId,
+  });
+  const { data: allDates = [], isLoading: allDatesLoading } =
+    useGetAllSlotsDateOfARoomQuery(roomId!, { skip: !roomId });
+
+  const [deleteTemporaryUnPaidBookingPermanently] =
+    useDeleteBookingPermanentlyMutation();
 
   useEffect(() => {
     if (roomInfo) {
       setCoverImage(roomInfo.pictures[0] as string);
     }
   }, [roomInfo]);
+  useEffect(() => {
+    if (urlRoomId) {
+      setRoomId(urlRoomId);
+    }
+  }, [urlRoomId]);
+
+  // delete bookings if it was cancelled
+  useEffect(() => {
+    const searchQuery = location.search;
+    if (searchQuery?.includes("?status=payment_failed&bookingId=")) {
+      console.log("object");
+      toast.error("Payment cancelled.");
+      const bookingId = searchQuery.split("bookingId=")[1] as string;
+      const handlePaymentCancellation = async () => {
+        setOpenModal(false);
+        await deleteTemporaryUnPaidBookingPermanently(bookingId).unwrap();
+        return <Navigate to={location.pathname} />;
+      };
+      handlePaymentCancellation();
+    }
+  }, [deleteTemporaryUnPaidBookingPermanently, location]);
 
   if (isLoading) {
     return <SingleRoomSkeleton />;
   }
 
   return (
-    <div className="mt-6">
+    <ScrollToTopContainer className="mt-6">
       <Breadcrumb
         className="mb-4 px-4"
         items={[
@@ -103,12 +142,34 @@ const SingleMeetingRoom = () => {
               </span>
             </div>
           </div>
-          <Link to={`/booking-form/${roomId}`}>
-            <FilledButton buttonText="Book Now" type="button" />
-          </Link>
+          <div onClick={() => setOpenModal(true)} className="w-fit">
+            <Tooltip
+              title={
+                allDatesLoading || allDates?.length === 0
+                  ? "This room has no booking date available"
+                  : ""
+              }
+              placement="topLeft"
+            >
+              <div style={{ display: "inline-block" }}>
+                <FilledButton
+                  buttonText="Book Now"
+                  type="button"
+                  disabled={allDatesLoading || allDates?.length === 0}
+                />
+              </div>
+            </Tooltip>
+          </div>
         </div>
       </div>
-    </div>
+
+      <ModalContainer
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        className=" max-w-[90%] sm:max-w-[80%] md:max-w-[65%] lg:max-w-[50%] w-[90%] lg:w-[44rem]"
+        children={<BookingForm roomId={roomId} openModal={openModal} />}
+      />
+    </ScrollToTopContainer>
   );
 };
 

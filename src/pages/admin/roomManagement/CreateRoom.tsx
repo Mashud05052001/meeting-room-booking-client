@@ -1,4 +1,4 @@
-import FormButton from "@/components/button/FilledButton";
+import FilledButton from "@/components/button/FilledButton";
 import QForm from "@/components/form/QForm";
 import QImages from "@/components/form/QImages";
 import QInput from "@/components/form/QInput";
@@ -69,7 +69,7 @@ const CreateRoom = () => {
           </div>
         </div>
         <div className="mt-10">
-          <FormButton buttonText="Add Room" isLoading={isLoading} />
+          <FilledButton buttonText="Add Room" isLoading={isLoading} />
         </div>
       </QForm>
     </div>

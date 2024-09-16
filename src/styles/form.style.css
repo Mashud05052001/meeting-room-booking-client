@@ -13,3 +13,25 @@
 .ant-upload-select {
   border-color: rgba(0, 0, 0, 0.5) !important;
 }
+
+.ant-select-dropdown .ant-select-item-empty {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* .ant-picker-date-panel .ant-picker-cell-hover .ant-picker-cell-inner { */
+.ant-picker-date-panel .ant-picker-cell-in-view .ant-picker-cell-inner {
+  font-weight: 700;
+
+  padding: 0 5px 25px !important;
+  border: 2px solid rgba(0, 0, 0, 0.51);
+}
+
+.ant-picker-date-panel .ant-picker-cell-disabled .ant-picker-cell-inner {
+  font-weight: 500;
+  padding: 0 !important;
+  border: 0.5px solid transparent;
+}
+.ant-picker-date-panel .ant-picker-cell-selected .ant-picker-cell-inner {
+  background: #003669 !important;
+  border: 0.5px solid #003669;
+}

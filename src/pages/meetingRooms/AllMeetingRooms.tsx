@@ -46,7 +46,7 @@ const AllMeetingRooms = () => {
               className={`${
                 openFilterModal
                   ? "opacity-100 duration-300 z-10"
-                  : "opacity-0 -z-10"
+                  : "opacity-0 -z-50"
               } absolute left-8 top-16 z-50 p-6 rounded-sm bg-slate-200 `}
             >
               <FilterRooms
