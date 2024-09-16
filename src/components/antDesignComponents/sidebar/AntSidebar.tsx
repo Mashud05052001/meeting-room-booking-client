@@ -35,7 +35,7 @@ const AntSidebar = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
-        <NavLink to={"/"}>
+        <NavLink to={"/home"}>
           <Button type="text" id="sidebar-icon">
             <span>
               Q<span className={`${collapsed ? "hidden" : ""}`}>Meet</span>

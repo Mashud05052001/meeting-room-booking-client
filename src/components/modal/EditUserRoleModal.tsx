@@ -17,11 +17,16 @@ const EditUserRoleModal = ({
   setUserInfo: React.Dispatch<React.SetStateAction<null>>;
 }) => {
   const [userRole, setUserRole] = useState(userInfo?.role);
-  const [updatedRole, setUpdatedRole] = useState("");
+  const [updatedRole, setUpdatedRole] = useState<string | null>(null);
   const [userRoleUpdate] = useUpdateUserRoleMutation();
+
   useEffect(() => {
-    setUserRole(userInfo?.role);
-  }, [userInfo]);
+    if (openModal) {
+      setUserRole(userInfo?.role);
+      setUpdatedRole(null);
+    }
+  }, [openModal, userInfo]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (userRole === updatedRole) {
@@ -35,7 +40,6 @@ const EditUserRoleModal = ({
     const loadingId = toast.loading("User role updating...");
     try {
       const result = (await userRoleUpdate(updatedData).unwrap()) as TSuccess;
-      console.log(result);
       if (result.success) {
         toast.success("User role updated successfully", { id: loadingId });
         setOpenModal(false);
@@ -46,11 +50,13 @@ const EditUserRoleModal = ({
       toast.error("Failed to update user role", { id: loadingId });
     }
   };
+
   return (
     <div
       onClick={() => {
         setOpenModal(false);
         setUserInfo(null);
+        setUpdatedRole(null);
       }}
       className={`fixed z-[100] w-screen ${
         openModal ? "visible opacity-100" : "invisible opacity-0"
@@ -68,6 +74,7 @@ const EditUserRoleModal = ({
           onClick={() => {
             setOpenModal(false);
             setUserInfo(null);
+            setUpdatedRole(null);
           }}
           size={24}
           className="absolute right-3 top-3 w-6 cursor-pointer fill-zinc-600 dark:fill-white"
@@ -87,14 +94,22 @@ const EditUserRoleModal = ({
           <div>
             <span className="mr-3">Role : </span>
             <Select
-              defaultValue={userRole}
+              value={updatedRole}
               onChange={(value) => {
                 setUpdatedRole(value);
               }}
               style={{ width: "50%" }}
               options={[
-                { value: "admin", label: "Admin" },
-                { value: "user", label: "User" },
+                {
+                  label: "Admin",
+                  value: "admin",
+                  disabled: userInfo?.role === "admin",
+                },
+                {
+                  label: "User",
+                  value: "user",
+                  disabled: userInfo?.role === "user",
+                },
               ]}
             />
           </div>

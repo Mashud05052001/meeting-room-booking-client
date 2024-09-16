@@ -87,7 +87,7 @@ const AllSlots = () => {
             const result = await deleteSlot(id).unwrap();
             console.log(result);
             if (result?.success) {
-              toast.success("Room is deleted successfully");
+              toast.success("Slot is deleted successfully");
               setOpenDeleteModalId(null);
             }
           } catch (error) {

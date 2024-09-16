@@ -23,7 +23,7 @@ const MyBookings = () => {
 
   const columns: TableColumnsType<TBookingsType> = [
     {
-      title: <p className="ml-4">Room Name</p>,
+      title: <p className="ml-4  min-w-20">Room Name</p>,
       dataIndex: "room",
       render: (room, field) => (
         <Link to={`/meeting-room/${field?.roomId}`} className="min-w-32">
@@ -72,15 +72,6 @@ const MyBookings = () => {
             {status.charAt(0).toUpperCase()}
             {status.slice(1).toLowerCase()}
           </p>
-          {/* {status !== "unconfirmed" ? (
-            <p className="border-common-600 rounded-md text-common-600">
-              Confirmed
-            </p>
-          ) : (
-            <p className="border-red-600 rounded-md text-red-600">
-              Unconfirmed
-            </p>
-          )} */}
         </div>
       ),
     },

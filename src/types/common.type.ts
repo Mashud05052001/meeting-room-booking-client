@@ -43,10 +43,11 @@ export type TSlotsFlatData = {
   isDeleted: boolean;
 };
 
-export type TBooking<T, Q> = {
+export type TBooking<T = TRoom, Q = TSlot, R = undefined> = {
   _id: string;
   room: T;
   slots: Q;
+  user: R;
   date: string;
   totalAmount: number;
   isConfirmed: "confirmed" | "unconfirmed" | "canceled";

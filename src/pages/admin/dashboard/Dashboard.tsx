@@ -69,7 +69,7 @@ const Dashboard = () => {
           ) : role === userRolesObj.admin ? (
             <RiAdminFill size={25} />
           ) : (
-            <FaUser size={20} />
+            <FaUser size={20} className="ml-1" />
           );
         const msg =
           role === userRolesObj.admin
