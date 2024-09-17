@@ -10,7 +10,7 @@ import httpStatus from "http-status";
 import axios from "axios";
 import { logout, setUser, TAuthState } from "../features/auth/auth.slice";
 
-export const baseURL = "http://localhost:5000/api/v1";
+export const baseURL = `${import.meta.env.VITE_BACKEND_URL}`;
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: baseURL,

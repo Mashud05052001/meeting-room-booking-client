@@ -7,7 +7,7 @@ const WhyChooseUs = () => {
   return (
     <section className="py-10">
       <HomeTitle title="Why Choose Us?" />
-      <div className="max-w-[50rem] mx-auto">
+      <div className="bg-gray-50 bg-opacity-50">
         <Collapse
           items={whyChoosedUsItems}
           bordered={false}

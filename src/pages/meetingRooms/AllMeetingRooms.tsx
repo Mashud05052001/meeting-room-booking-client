@@ -1,3 +1,4 @@
+import ScrollToTopContainer from "@/components/container/ScrollToTopContainer";
 import FilterRooms from "@/components/pagesComponents/meetingRoom/FilterRooms";
 import MeetingRoomAllCarts from "@/components/pagesComponents/meetingRoom/MeetingRoomAllCarts";
 import { useGetAllRoomsQuery } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
@@ -29,48 +30,50 @@ const AllMeetingRooms = () => {
     };
   }, []);
   return (
-    <div className="mb-20 relative">
-      <div className="flex flex-col md:flex-row gap-0 md:gap-6 px-6 xl:px-0">
-        {/* below md screen */}
-        <div className="md:hidden">
-          <div
-            ref={openFilterModalRef}
-            className="h-10 md:ml-4 mr-3 2xl:mr-0 w-fit"
-          >
-            <Hamburger
-              size={18}
-              toggled={openFilterModal}
-              toggle={setOpenFilterModal}
-            />
+    <ScrollToTopContainer>
+      <div className="mb-20 relative">
+        <div className="flex flex-col md:flex-row gap-0 md:gap-6 px-6 xl:px-0">
+          {/* below md screen */}
+          <div className="md:hidden">
             <div
-              className={`${
-                openFilterModal
-                  ? "opacity-100 duration-300 z-10"
-                  : "opacity-0 -z-50"
-              } absolute left-8 top-16 z-50 p-6 rounded-sm bg-slate-200 `}
+              ref={openFilterModalRef}
+              className="h-10 md:ml-4 mr-3 2xl:mr-0 w-fit"
             >
-              <FilterRooms
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
+              <Hamburger
+                size={18}
+                toggled={openFilterModal}
+                toggle={setOpenFilterModal}
               />
+              <div
+                className={`${
+                  openFilterModal
+                    ? "opacity-100 duration-300 z-10"
+                    : "opacity-0 -z-50"
+                } absolute left-8 top-16 z-50 p-6 rounded-sm bg-slate-200 `}
+              >
+                <FilterRooms
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="hidden md:block">
-          <FilterRooms
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-          />
-        </div>
-        <div className="mt-6 flex-grow">
-          <MeetingRoomAllCarts
-            allRooms={allRooms?.data}
-            roomsDataLoading={roomsDataLoading}
-            roomsDataFetching={roomsDataFetching}
-          />
+          <div className="hidden md:block">
+            <FilterRooms
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
+          </div>
+          <div className="mt-6 flex-grow">
+            <MeetingRoomAllCarts
+              allRooms={allRooms?.data}
+              roomsDataLoading={roomsDataLoading}
+              roomsDataFetching={roomsDataFetching}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </ScrollToTopContainer>
   );
 };
 
