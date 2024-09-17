@@ -4,7 +4,7 @@ This is the client-side code for **QMeet**, a modern meeting room booking system
 
 ## Live URL
 
-Live URL = **[https://meeting-room-booking-system-frontend.vercel.app](#)**
+Live URL = **[QMeet](https://meeting-room-booking-system-frontend.vercel.app)**
 
 ## Features
 
