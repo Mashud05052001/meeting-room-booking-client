@@ -23,7 +23,7 @@ const ScrollToTopContainer = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 600) {
+      if (window.scrollY > 300) {
         setShowScrollIcon(true);
       } else {
         setShowScrollIcon(false);
