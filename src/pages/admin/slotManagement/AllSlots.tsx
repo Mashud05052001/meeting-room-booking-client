@@ -1,11 +1,11 @@
-import EditRoomModal from "@/components/modal/EditRoomModal";
+import EditSlotModal from "@/components/modal/EditSlotModal";
 import {
   useDeleteASlotMutation,
   useGetSlotsQuery,
 } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
 import "@/styles/table.style.css";
 
-import { TRoom, TSlotsFlatData } from "@/types";
+import { TSlot, TSlotsFlatData } from "@/types";
 import { generateSlotsFlatData } from "@/utils/function";
 import type { TableColumnsType } from "antd";
 import { Popconfirm, Table } from "antd";
@@ -20,7 +20,9 @@ type TAllSlotsType = {
 
 const AllSlots = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [roomInfo, setRoomInfo] = useState<TRoom | null>(null);
+  const [slotInfo, setSlotInfo] = useState<
+    (Partial<TSlot> & { price: number; capacity: number }) | null
+  >(null);
   const [openDeleteModalId, setOpenDeleteModalId] = useState<string | null>(
     null
   );
@@ -107,11 +109,21 @@ const AllSlots = () => {
               <MdEdit
                 size={25}
                 onClick={() => {
-                  const findRoomInfo = allSlots.find(
+                  const findSlotInfo = allSlots.find(
                     (slot) => slot.slotId === record.slotId
                   );
-                  console.log(findRoomInfo);
-                  // setRoomInfo(findRoomInfo);
+                  const slotData: Partial<TSlot> & {
+                    price: number;
+                    capacity: number;
+                  } = {
+                    _id: findSlotInfo?.slotId as string,
+                    date: findSlotInfo?.date as string,
+                    startTime: findSlotInfo?.startTime as string,
+                    endTime: findSlotInfo?.endTime as string,
+                    price: findSlotInfo?.pricePerSlot as number,
+                    capacity: findSlotInfo?.capacity as number,
+                  };
+                  setSlotInfo(slotData);
                   setOpenModal(true);
                 }}
               />
@@ -178,11 +190,11 @@ const AllSlots = () => {
           openModal ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
-        <EditRoomModal
+        <EditSlotModal
           openModal={openModal}
           setOpenModal={setOpenModal}
-          roomInfo={roomInfo}
-          setRoomInfo={setRoomInfo}
+          slotInfo={slotInfo}
+          setSlotInfo={setSlotInfo}
         />
       </div>
     </div>

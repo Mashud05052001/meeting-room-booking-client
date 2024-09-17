@@ -63,7 +63,7 @@ const authApi = baseApi.injectEndpoints({
         const { id, data } = payload;
         return {
           url: `/rooms/${id}`,
-          method: "POST",
+          method: "PUT",
           body: data,
         };
       },
@@ -95,6 +95,17 @@ const authApi = baseApi.injectEndpoints({
       transformResponse: (res: TReduxReponseWithoutMeta<TSlot>) => {
         return res;
       },
+    }),
+    updateSlot: builder.mutation({
+      query: (payload) => {
+        const { data, id } = payload;
+        return {
+          url: `/slots/${id}`,
+          method: "PATCH",
+          body: data,
+        };
+      },
+      invalidatesTags: ["slots"],
     }),
     getSlots: builder.query({
       query: (payload: Record<string, string>) => {
@@ -164,6 +175,7 @@ const authApi = baseApi.injectEndpoints({
 
 export const {
   useCreateRoomMutation,
+  useUpdateSlotMutation,
   useGetAllRoomsQuery,
   useGetARoomQuery,
   useUpdateARoomMutation,
