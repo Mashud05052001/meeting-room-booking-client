@@ -90,6 +90,17 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+    // Send contact us email
+    contactUsEmail: builder.mutation({
+      query: (payload) => {
+        return {
+          url: "/auth/send-contact-email",
+          method: "POST",
+          body: payload,
+        };
+      },
+    }),
   }),
 });
 
@@ -102,4 +113,5 @@ export const {
   useLoginMutation,
   useChangePassowrdMutation,
   useForgetPassowrdMutation,
+  useContactUsEmailMutation,
 } = authApi;

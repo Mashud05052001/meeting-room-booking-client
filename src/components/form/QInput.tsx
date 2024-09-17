@@ -77,7 +77,12 @@ const QInput = ({
           rows={rows}
           placeholder={placeholder}
           disabled={disabled}
-          {...field}
+          value={fieldValue}
+          onChange={(e) => {
+            const value = e.target.value;
+            fieldOnChange(value);
+          }}
+          {...restFieldProps}
           {...others}
         />
       );

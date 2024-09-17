@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 type TMotionContainerProps = {
@@ -7,12 +7,16 @@ type TMotionContainerProps = {
 };
 
 const OpacityMotion = ({ children, className }: TMotionContainerProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0.5, scale: 0.98 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.25 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isVisible ? 1 : 0 }}
+      transition={{ duration: 0.3 }}
     >
       {children}
     </motion.div>

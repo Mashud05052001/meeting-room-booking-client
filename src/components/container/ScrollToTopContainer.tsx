@@ -1,4 +1,5 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { FaArrowUp } from "react-icons/fa"; // Using react-icons for the scroll-to-top icon
 
 type TScrollToTopContainerProps = {
   children: ReactNode;
@@ -11,6 +12,8 @@ const ScrollToTopContainer = ({
   className,
   scrollBehaviour = "smooth",
 }: TScrollToTopContainerProps) => {
+  const [showScrollIcon, setShowScrollIcon] = useState(false);
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -18,7 +21,46 @@ const ScrollToTopContainer = ({
       behavior: scrollBehaviour,
     });
   }, [scrollBehaviour]);
-  return <div className={`${className}`}>{children}</div>;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 600) {
+        setShowScrollIcon(true);
+      } else {
+        setShowScrollIcon(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: scrollBehaviour,
+    });
+  };
+
+  return (
+    <div className={`${className} relative`}>
+      {children}
+
+      {/* Scroll to Top Icon */}
+      {showScrollIcon && (
+        <button
+          onClick={handleScrollToTop}
+          className="fixed bottom-8 right-8 p-3 bg-common-600 text-white rounded-full shadow-lg transition-transform transform hover:scale-110 focus:outline-none"
+        >
+          <FaArrowUp size={20} />
+        </button>
+      )}
+    </div>
+  );
 };
 
 export default ScrollToTopContainer;

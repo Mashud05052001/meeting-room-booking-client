@@ -1,22 +1,13 @@
-import {
-  useUpdateARoomMutation,
-  useUpdateSlotMutation,
-} from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
+import { useUpdateSlotMutation } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
 import { TSlot } from "@/types";
-import { useEffect, useState } from "react";
-import {
-  FieldValues,
-  FormProvider,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form";
+import moment from "moment";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 import { RxCross2 } from "react-icons/rx";
+import { toast } from "sonner";
 import FilledButton from "../button/FilledButton";
 import QDatePicker from "../form/QDatePicker";
-import QTimePickerRange from "../form/QTimePickerRange";
 import QForm from "../form/QForm";
-import { toast } from "sonner";
-import moment from "moment";
+import QTimePickerRange from "../form/QTimePickerRange";
 
 type TEditSlotModalProps = {
   openModal: boolean;
