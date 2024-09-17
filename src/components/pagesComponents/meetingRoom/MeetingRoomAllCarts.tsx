@@ -7,17 +7,19 @@ type TMeetingRoomAllCartsProps = {
   allRooms: TRoom[] | undefined;
   roomsDataLoading: boolean;
   roomsDataFetching: boolean;
+  loadingSkeletonNumber?: number;
 };
 
 const MeetingRoomAllCarts = ({
   allRooms,
   roomsDataFetching,
   roomsDataLoading,
+  loadingSkeletonNumber = 12,
 }: TMeetingRoomAllCartsProps) => {
   if (roomsDataLoading) {
     return (
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6">
-        {Array(12)
+        {Array(loadingSkeletonNumber)
           .fill(0)
           .map((_, index) => (
             <CartSkeleton key={index} />

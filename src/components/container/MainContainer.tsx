@@ -1,11 +1,6 @@
-import { ReactNode } from "react";
+import { TChildren } from "@/types";
 
-type TMainContainerProps = {
-  children: ReactNode;
-  className?: string;
-};
-
-const MainContainer = ({ children, className }: TMainContainerProps) => {
+const MainContainer = ({ children, className }: TChildren) => {
   return <div className={`${className} max-w-7xl mx-auto `}>{children}</div>;
 };
 

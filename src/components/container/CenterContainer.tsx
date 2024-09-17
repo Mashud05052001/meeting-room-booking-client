@@ -1,11 +1,6 @@
-import { ReactNode } from "react";
+import { TChildren } from "@/types";
 
-type TMainContainerProps = {
-  children: ReactNode;
-  className?: string;
-};
-
-const CenterContainer = ({ children, className }: TMainContainerProps) => {
+const CenterContainer = ({ children, className }: TChildren) => {
   return (
     <div
       className={` mx-auto absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${className}`}

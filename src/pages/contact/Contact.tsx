@@ -47,7 +47,7 @@ const Contact = () => {
   };
 
   return (
-    <OpacityMotion className="py-5 px-4 lg:py-8  flex items-center mb-20">
+    <OpacityMotion className="py-5 px-4 lg:py-8 flex items-center mb-20">
       <div className="flex flex-col justify-center w-full ">
         {/* Contact Us Infos */}
         <div className="h-full w-full lg:w-7/12 mx-auto mb-10">

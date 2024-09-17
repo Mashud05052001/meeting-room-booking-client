@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 export type TRoom = {
   _id: string;
   name: string;
@@ -54,4 +55,9 @@ export type TBooking<T = TRoom, Q = TSlot, R = undefined> = {
   isDeleted: boolean;
   paymentStatus: "paid" | "non-paid" | "";
   transactionId: string;
+};
+
+export type TChildren = {
+  children: ReactNode;
+  className?: string;
 };

@@ -1,8 +1,23 @@
+import CommonMarginTopContainer from "@/components/container/CommonMarginTopContainer";
+import ScrollToTopContainer from "@/components/container/ScrollToTopContainer";
+import OpacityMotion from "@/components/motionDiv/OpacityMotion";
+import HomeBanner from "@/components/pagesComponents/home/HomeBanner";
+import HomeFeaturedRoom from "@/components/pagesComponents/home/HomeFeaturedRoom";
+import HomeServices from "@/components/pagesComponents/home/HomeServices";
+
 const Home = () => {
   return (
-    <div>
-      <h1 className="text-2xl"> This is Home </h1>
-    </div>
+    <ScrollToTopContainer>
+      <OpacityMotion>
+        <HomeBanner />
+        <CommonMarginTopContainer>
+          <HomeServices />
+        </CommonMarginTopContainer>
+        <CommonMarginTopContainer>
+          <HomeFeaturedRoom />
+        </CommonMarginTopContainer>
+      </OpacityMotion>
+    </ScrollToTopContainer>
   );
 };
 

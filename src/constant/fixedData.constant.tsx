@@ -8,6 +8,12 @@ import developer1 from "@/assets/enployee/developer1.jpg";
 import developer2 from "@/assets/enployee/developer2.jpg";
 import developer3 from "@/assets/enployee/developer3.jpg";
 import { InboxIcon, MapPinIcon, PhoneIcon } from "@heroicons/react/24/outline";
+import {
+  FaRegClock,
+  FaRegCalendarAlt,
+  FaRegMoneyBillAlt,
+} from "react-icons/fa";
+import { RiCustomerService2Fill } from "react-icons/ri";
 
 export const customerTestimonials = [
   {
@@ -84,5 +90,32 @@ export const contactUsArray = [
     icon: () => <MapPinIcon className="size-6" />,
     title: "Address",
     value: "Fort Wainwright, Alaska(AK)",
+  },
+];
+
+export const allHomeServices = [
+  {
+    id: 1,
+    icon: () => <FaRegClock className="size-8 sm:size-10 " />,
+    title: "Real Time Availability",
+    subTitle: "Always up-to-date",
+  },
+  {
+    id: 2,
+    icon: () => <FaRegCalendarAlt className="size-8 sm:size-10 " />,
+    title: "Flexible Scheduling",
+    subTitle: "Book on your terms",
+  },
+  {
+    id: 3,
+    icon: () => <FaRegMoneyBillAlt className="size-8 sm:size-10 " />,
+    title: "Instant Confirmation",
+    subTitle: "Book in seconds",
+  },
+  {
+    id: 4,
+    icon: () => <RiCustomerService2Fill className="size-8 sm:size-10 " />,
+    title: "24/7 Support",
+    subTitle: "Help anytime, always",
   },
 ];

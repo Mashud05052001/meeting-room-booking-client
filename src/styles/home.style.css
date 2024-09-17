@@ -1,0 +1,25 @@
+.slick-dots {
+  display: none !important;
+}
+
+.custom-prev,
+.custom-next {
+  background-color: #bdbdbd5b;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  cursor: pointer;
+  border-radius: 100%;
+}
+
+.custom-prev {
+  left: 2rem;
+}
+
+.custom-next {
+  right: 2rem;
+}

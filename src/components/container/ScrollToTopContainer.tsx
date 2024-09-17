@@ -1,9 +1,8 @@
-import { ReactNode, useEffect, useState } from "react";
-import { FaArrowUp } from "react-icons/fa"; // Using react-icons for the scroll-to-top icon
+import { TChildren } from "@/types";
+import { useEffect, useState } from "react";
+import { FaArrowUp } from "react-icons/fa";
 
-type TScrollToTopContainerProps = {
-  children: ReactNode;
-  className?: string;
+type TScrollToTopContainerProps = TChildren & {
   scrollBehaviour?: "smooth" | "instant";
 };
 
