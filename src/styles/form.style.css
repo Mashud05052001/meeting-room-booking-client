@@ -34,3 +34,14 @@
   background: #003669 !important;
   border: 0.5px solid #003669;
 }
+
+.ant-pagination .ant-pagination-item-active,
+.ant-pagination .ant-pagination-item-active:hover,
+.ant-pagination .ant-pagination-options-quick-jumper input:hover,
+.ant-pagination .ant-pagination-options-quick-jumper input:focus {
+  border: 1px solid #003669;
+}
+
+.ant-pagination .ant-pagination-item-active a {
+  color: #003669 !important;
+}

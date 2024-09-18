@@ -1,9 +1,12 @@
 const arr = [
     {
-        "range": "pricePerSlot:gte=332,lte=1000"
+        "page": 1
     },
     {
-        "range": "capacity:gte=440,lte=1000"
+        "limit": 10
+    },
+    {
+        "range": "pricePerSlot:gte=434,lte=1000"
     }
 ]
 

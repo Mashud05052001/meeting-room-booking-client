@@ -40,7 +40,7 @@ const SingleCart = ({ room }: { room: TRoom }) => {
           <p>
             Price per slot:{" "}
             <span className="font-semibold text-slate-800">
-              {room?.pricePerSlot}
+              ${room?.pricePerSlot}
             </span>
           </p>
           <p>

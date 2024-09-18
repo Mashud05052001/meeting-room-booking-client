@@ -13,9 +13,10 @@ export type TError = {
   };
 };
 export type TMeta = {
+  totalData: number;
   limit: number;
   page: number;
-  total: number;
+  skip: number;
   totalPage: number;
 };
 

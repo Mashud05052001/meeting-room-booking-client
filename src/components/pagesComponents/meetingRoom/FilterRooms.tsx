@@ -4,7 +4,6 @@ import Search from "antd/es/input/Search";
 import { useEffect, useState } from "react";
 
 type TFilterRoomsProps = {
-  searchQuery: Record<string, unknown>[];
   setSearchQuery: React.Dispatch<
     React.SetStateAction<Record<string, unknown>[]>
   >;
@@ -72,7 +71,15 @@ const FilterRooms = ({ setSearchQuery }: TFilterRoomsProps) => {
     setCapacityRange([0, 1000]);
     setSortPrice("default");
     setSearch("");
-    setSearchQuery([]);
+    setSearchQuery((prevQuery) => {
+      const newQuery = [];
+      for (const item of prevQuery) {
+        if (item?.page || item?.limit) {
+          newQuery.push(item);
+        }
+      }
+      return newQuery;
+    });
   };
 
   useEffect(() => {
