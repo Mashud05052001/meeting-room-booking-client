@@ -13,3 +13,10 @@ export const userRolesArrayWithSuperAdmin: TUserRoles[] = [
   "user",
   "super-admin",
 ];
+
+export const authErrorMesssages = [
+  "Token is missing!",
+  "Authorization Failed cause or role not matching!",
+  "User not found!",
+  "Authorization Failed due to invalid token",
+];

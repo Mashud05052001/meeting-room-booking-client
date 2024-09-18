@@ -1,3 +1,5 @@
+import { authErrorMesssages } from "@/constant/auth.constant";
+import { TError } from "@/types";
 import {
   BaseQueryApi,
   BaseQueryFn,
@@ -5,10 +7,10 @@ import {
   FetchArgs,
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query";
-import { RootState } from "../store";
-import httpStatus from "http-status";
 import axios from "axios";
+import httpStatus from "http-status";
 import { logout, setUser, TAuthState } from "../features/auth/auth.slice";
+import { RootState } from "../store";
 
 export const baseURL = `${import.meta.env.VITE_BACKEND_URL}`;
 
@@ -38,17 +40,25 @@ export const customBaseQuery: BaseQueryFn<
 
   let result = await baseQuery(args, api, extraOptions);
   if (result?.error?.status === httpStatus.UNAUTHORIZED) {
-    const data = await axios.post(`${baseURL}/auth/generate-access-token`);
-    const token = data.data?.token;
-    if (token) {
-      const authUser: TAuthState = {
-        token,
-        user: (getState() as RootState).auth.user,
-      };
-      dispatch(setUser(authUser));
-      result = await baseQuery(args, api, extraOptions);
+    const errorMessage = (result?.error as TError)?.data?.message;
+    if (
+      errorMessage &&
+      authErrorMesssages.find((message) => errorMessage?.includes(message))
+    ) {
+      console.log("Authorization Error");
     } else {
-      dispatch(logout());
+      const data = await axios.post(`${baseURL}/auth/generate-access-token`);
+      const token = data.data?.token;
+      if (token) {
+        const authUser: TAuthState = {
+          token,
+          user: (getState() as RootState).auth.user,
+        };
+        dispatch(setUser(authUser));
+        result = await baseQuery(args, api, extraOptions);
+      } else {
+        dispatch(logout());
+      }
     }
   }
 

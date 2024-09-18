@@ -30,7 +30,7 @@ const QForm = ({
       <form
         onSubmit={methods.handleSubmit((data) => {
           onSubmit(data);
-          // methods.reset();
+          methods.reset();
         })}
         className={className}
       >

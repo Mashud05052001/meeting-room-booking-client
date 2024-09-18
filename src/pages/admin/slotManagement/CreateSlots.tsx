@@ -20,6 +20,7 @@ const CreateSlots = () => {
     []
   );
   const [createSlots, { isLoading }] = useCreateSlotMutation();
+
   const roomOptions: TSelectOptions[] =
     allRooms?.data?.map((room) => {
       return {
