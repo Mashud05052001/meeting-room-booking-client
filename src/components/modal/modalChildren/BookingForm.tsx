@@ -34,6 +34,7 @@ const BookingForm = ({ roomId }: { roomId: string; openModal: boolean }) => {
     isLoading: slotsDataLoading,
     isFetching: slotsDataFetching,
   } = useGetSlotsQuery(query, { skip: !selectedDate });
+
   const { data: userData, isLoading: userDataLoading } = useGetUserQuery({
     email: userTokenInfo?.email || "",
   });
@@ -50,7 +51,7 @@ const BookingForm = ({ roomId }: { roomId: string; openModal: boolean }) => {
 
   useEffect(() => {
     if (allSlotsInfo) {
-      const newArr = allSlotsInfo[0]?.specificDateSlots[0]?.slots
+      const newArr = allSlotsInfo?.data[0]?.specificDateSlots[0]?.slots
         .filter((slot) => !slot.isBooked && !slot.isDeleted)
         .map((slot) => ({
           data: `${slot.startTime}-${slot.endTime}`,

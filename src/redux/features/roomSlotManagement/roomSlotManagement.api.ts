@@ -120,8 +120,11 @@ const authApi = baseApi.injectEndpoints({
         };
       },
       providesTags: ["slots"],
-      transformResponse: (res: TReduxReponseWithoutMeta<TModifiedSlot>) => {
-        return res.data;
+      transformResponse: (res: TReduxReponse<TModifiedSlot>) => {
+        return {
+          data: res?.data?.data,
+          meta: res?.data?.meta,
+        };
       },
     }),
     getSingleSlot: builder.query({
@@ -181,6 +184,7 @@ export const {
   useUpdateARoomMutation,
   useDeleteARoomMutation,
   useCreateSlotMutation,
+  // modified it
   useGetSlotsQuery,
   useGetSingleSlotQuery,
   useGetMultipleSlotsQuery,

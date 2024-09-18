@@ -19,7 +19,7 @@ const ModalContainer = ({
       onClick={() => {
         setOpenModal(false);
       }}
-      className={`fixed z-[100] w-screen max-w-[1600px] mx-auto ${
+      className={`fixed z-[200] w-screen max-w-[1600px] mx-auto ${
         openModal ? "visible opacity-100" : "invisible opacity-0"
       } inset-0 grid place-items-center bg-black/20 backdrop-blur-sm duration-100 dark:bg-transparent`}
     >

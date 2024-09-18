@@ -1,7 +1,7 @@
 import ScrollToTopContainer from "@/components/container/ScrollToTopContainer";
 import FilterRooms from "@/components/pagesComponents/meetingRoom/FilterRooms";
 import MeetingRoomAllCarts from "@/components/pagesComponents/meetingRoom/MeetingRoomAllCarts";
-import MeetingRoomPagination from "@/components/pagesComponents/meetingRoom/MeetingRoomPagination";
+import MeetingRoomPagination from "@/components/paginate/MeetingRoomPagination";
 import { useGetAllRoomsQuery } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
 import { TMeta } from "@/types";
 import Hamburger from "hamburger-react";

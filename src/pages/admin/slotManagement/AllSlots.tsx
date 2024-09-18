@@ -1,11 +1,13 @@
 import EditSlotModal from "@/components/modal/EditSlotModal";
+import SlotsFilter from "@/components/pagesComponents/slots/SlotsFilter";
+import SlotsPagination from "@/components/paginate/SlotsPagination";
 import {
   useDeleteASlotMutation,
   useGetSlotsQuery,
 } from "@/redux/features/roomSlotManagement/roomSlotManagement.api";
 import "@/styles/table.style.css";
 
-import { TSlot, TSlotsFlatData } from "@/types";
+import { TModifiedSlot, TSlot, TSlotsFlatData } from "@/types";
 import { generateSlotsFlatData } from "@/utils/function";
 import type { TableColumnsType } from "antd";
 import { Popconfirm, Table } from "antd";
@@ -19,6 +21,10 @@ type TAllSlotsType = {
 } & Partial<TSlotsFlatData>;
 
 const AllSlots = () => {
+  const [searchQuery, setSearchQuery] = useState<Record<string, string>>({
+    page: "1",
+    limit: "10",
+  });
   const [openModal, setOpenModal] = useState(false);
   const [slotInfo, setSlotInfo] = useState<
     (Partial<TSlot> & { price: number; capacity: number }) | null
@@ -27,12 +33,17 @@ const AllSlots = () => {
     null
   );
 
-  const { data: slotsData, isLoading: slotsDataLoading } = useGetSlotsQuery({});
+  const {
+    data: slotsData,
+    isLoading: slotsDataLoading,
+    isFetching: slotsDataFetching,
+  } = useGetSlotsQuery(searchQuery);
   const [deleteSlot, { isLoading: deleteSlotLoading }] =
     useDeleteASlotMutation();
 
   let allSlots: TSlotsFlatData[] = [];
-  if (slotsData?.length !== 0) allSlots = generateSlotsFlatData(slotsData!);
+  if (slotsData?.data?.length !== 0)
+    allSlots = generateSlotsFlatData(slotsData?.data as TModifiedSlot);
 
   const columns: TableColumnsType<TAllSlotsType> = [
     {
@@ -160,7 +171,7 @@ const AllSlots = () => {
       },
     },
   ];
-
+  console.log(searchQuery);
   const roomsTableData: TAllSlotsType[] =
     allSlots?.map((slot) => ({
       key: slot?.slotId,
@@ -178,13 +189,28 @@ const AllSlots = () => {
   return (
     <div className="mt-10">
       <h1 className="text-3xl font-semibold mb-5 ml-3">All Slots</h1>
+      <div className=" ml-4">
+        <SlotsFilter setSearchQuery={setSearchQuery} />
+      </div>
       <Table
         className="custom-scrollbar"
         columns={columns}
         dataSource={roomsTableData}
         pagination={false}
-        loading={slotsDataLoading}
+        loading={slotsDataLoading || slotsDataFetching}
       />
+      {/* Pagination */}
+      {slotsData?.data.length ? (
+        <div className="mt-6 flex ">
+          <SlotsPagination
+            metaData={slotsData?.meta}
+            setSearchQuery={setSearchQuery}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {/* Edit Modal */}
       <div
         className={`${
           openModal ? "visible opacity-100" : "invisible opacity-0"
